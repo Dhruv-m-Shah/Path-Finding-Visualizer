@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+</head>
+
+<body style=" background: lightblue;">
+    <canvas id="c" style="background: #fff; margin:20px"></canvas>
+</body>
+<script type="text/javascript" language="javascript">
+    var htmlCanvas = document.getElementById('c');
+    var context = htmlCanvas.getContext("2d");
+    htmlCanvas.width = screen.width;
+    htmlCanvas.height = screen.height;
+    var bw = screen.width;
+    // Box height
+    var bh = screen.height;
+    // Padding
+    var p = 10;
+
+    // Box width
+    context.beginPath();
+    function drawBoard() {
+        for (var x = 0; x <= bw; x += 40) {
+            for (var y = 0; y <= bh; y += 40) {
+                context.rect(x, y, 40, 40);
+            }
+        }
+        context.stroke();
+    }
+    drawBoard();
+    function lightUpSquare(xpos, ypos) {
+        
+        xpos = xpos-28;
+        ypos = ypos-28;
+        var x = Math.floor(xpos/40)*40;
+        var y = Math.floor(ypos/40)*40;
+        console.log(x, y);
+        context.fillStyle = "#FF0000";
+        context.fillRect(x, y, 40, 40);
+        context.stroke();
+    }
+    onmousemove = function (e) {
+        lightUpSquare(e.clientX, e.clientY);
+        
+    }
+</script>
+
+</html>
