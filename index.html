@@ -8,6 +8,13 @@
     <canvas id="c" style="background: #fff; margin:20px"></canvas>
 </body>
 <script type="text/javascript" language="javascript">
+    class location1 {
+        constructor(xpos, ypos) {
+            this.xpos = xpos;
+            this.ypos = ypos;
+        }
+    }
+    previousGrid = new location1(0, 0);
     var htmlCanvas = document.getElementById('c');
     var context = htmlCanvas.getContext("2d");
     htmlCanvas.width = screen.width;
@@ -20,6 +27,7 @@
 
     // Box width
     context.beginPath();
+
     function drawBoard() {
         for (var x = 0; x <= bw; x += 40) {
             for (var y = 0; y <= bh; y += 40) {
@@ -29,20 +37,27 @@
         context.stroke();
     }
     drawBoard();
+
     function lightUpSquare(xpos, ypos) {
-        
-        xpos = xpos-28;
-        ypos = ypos-28;
-        var x = Math.floor(xpos/40)*40;
-        var y = Math.floor(ypos/40)*40;
-        console.log(x, y);
-        context.fillStyle = "#FF0000";
-        context.fillRect(x, y, 40, 40);
-        context.stroke();
+        xpos = xpos - 28;
+        ypos = ypos - 28;
+        var x = Math.floor(xpos / 40) * 40;
+        var y = Math.floor(ypos / 40) * 40;
+        if (x != previousGrid.xpos || y != previousGrid.ypos) {
+            context.fillStyle = "#FFFFFF"
+            context.fillRect(previousGrid.xpos, previousGrid.ypos, 40, 40);
+            console.log(x, y);
+            context.fillStyle = "#FF0000";
+            context.fillRect(x, y, 40, 40);
+            context.stroke();
+            previousGrid.xpos = x;
+            previousGrid.ypos = y;
+        }
+
     }
     onmousemove = function (e) {
         lightUpSquare(e.clientX, e.clientY);
-        
+
     }
 </script>
 
