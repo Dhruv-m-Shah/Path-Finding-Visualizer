@@ -1,0 +1,62 @@
+.selectorbox {
+    top: 50%;
+    position: fixed;
+    width: 200px;
+    height: 600px;
+    background-color: black;
+    transform: translateY(-300px);
+
+}
+
+.start_point {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    width: 100px;
+    height: 50px;
+    background-color: red;
+}
+
+.end_point {
+    position: absolute;
+    top: 110px;
+    left: 50px;
+    width: 100px;
+    height: 50px;
+    background-color: red;
+}
+
+.draw_wall {
+    position: absolute;
+    top: 180px;
+    left: 50px;
+    width: 100px;
+    height: 50px;
+    background-color: red;
+}
+
+.dropdown.algo {
+    position: absolute;
+    left: 25px !important;
+    top: 250px;
+    width: 100px !important;
+}
+
+.dropdown.algo {
+    position: absolute;
+    left: 50px;
+    top: 250px;
+    width: 100px !important;
+}
+
+.btn.btn-success.start {
+    position: absolute;
+    left: 70.735px;
+    top: 310px;
+}
+
+#c {
+    position: relative;
+    left: 200px;
+    z-index: -2;
+}
