@@ -8,51 +8,56 @@
 
 }
 
-.start_point {
+.btn.btn-primary.start_point {
     position: absolute;
     top: 40px;
     left: 50px;
     width: 100px;
     height: 50px;
-    background-color: red;
 }
 
-.end_point {
+.btn.btn-primary.end_point {
     position: absolute;
     top: 110px;
     left: 50px;
     width: 100px;
     height: 50px;
-    background-color: red;
 }
 
-.draw_wall {
+.btn.btn-primary.draw_wall {
     position: absolute;
     top: 180px;
     left: 50px;
     width: 100px;
     height: 50px;
-    background-color: red;
 }
 
-.dropdown.algo {
+.btn.btn-primary.clear{
     position: absolute;
-    left: 25px !important;
     top: 250px;
-    width: 100px !important;
-}
-
-.dropdown.algo {
-    position: absolute;
     left: 50px;
-    top: 250px;
-    width: 100px !important;
+    width: 100px;
+    height: 50px;
+}
+
+
+
+.dropdown.algo {
+    position: absolute;
+    left: 25px;
+    top: 320px;
 }
 
 .btn.btn-success.start {
     position: absolute;
-    left: 70.735px;
-    top: 310px;
+    left: 50px;
+    top: 380px;
+    min-width: 100px;
+}
+#dropdownMenuButton{
+    min-width: 150px;
+    top: 250px;
+
 }
 
 #c {

@@ -9,28 +9,23 @@
 <body style=" background: lightblue;">
 
     <div class="selectorbox">
-        <div style="text-align: center;" class="start_point" onclick = "start_state()">
-            <p1>Start</p1>
-        </div>
-        <div style="text-align: center;" class="end_point" onclick = "end_state()">
-            <p1>End</p1>
-        </div>
-        <div style="text-align: center;" class="draw_wall" onclick = "wall_state()">
-            <p1>Draw Walls</p1>
-        </div>
+        <button type="button" class="btn btn-primary start_point" onclick ="start_state()">Start</button>
+        <button type="button" class="btn btn-primary end_point" onclick ="end_state()">End</button>
+        <button type="button" class="btn btn-primary draw_wall" onclick ="wall_state()">Draw Wall</button>
+        <button type="button" class="btn btn-primary clear" onclick ="clear_slate()">Clear</button>
         <div class="dropdown algo">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Pick Algorithm
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">A*</a>
-                <a class="dropdown-item" href="#">Dijkstra</a>
-                <a class="dropdown-item" href="#">BFS</a>
+                <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
+                <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
+                <a class="dropdown-item" href="#" onclick = "bfs_mode()">BFS</a>
             </div>
         </div>
         <div class="col text-center">
-            <button type="button" class="btn btn-success start">Start</button>
+            <button type="button" class="btn btn-success start" onclick = "start_algo()">Start</button>
         </div>
     </div>
     <canvas class="drawingboard" id="c" style="background: #fff; margin:20px"></canvas>
