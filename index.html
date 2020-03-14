@@ -7,6 +7,7 @@
 <body style=" background: lightblue;">
     <canvas id="c" style="background: #fff; margin:20px"></canvas>
 </body>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" language="javascript">
     class location1 {
         constructor(xpos, ypos) {
@@ -53,11 +54,9 @@
             previousGrid.xpos = x;
             previousGrid.ypos = y;
         }
-
     }
     onmousemove = function (e) {
-        lightUpSquare(e.clientX, e.clientY);
-
+        lightUpSquare(event.pageX, event.pageY);
     }
 </script>
 
