@@ -226,17 +226,25 @@ function start_algo() {
 }
 
 const asyncWait = ms => new Promise(resolve => setTimeout(resolve, ms))
+nodes = []
+newnodes = []
+visitednodes = []
 
 function draw(xpos, ypos) {
     context.fillStyle = "#FF0000";
     context.fillRect(xpos, ypos, 40, 40);
     context.stroke();
+    newnodes.push([xpos, ypos]);
+    visitednodes.push([xpos, ypos]);
 }
 
 const syncWait = ms => {
     const end = Date.now() + ms
     while (Date.now() < end) continue
 }
+
+newnodes1 = [];
+
 function bfs() {
     console.log("AD");
     nodes = [
@@ -247,65 +255,66 @@ function bfs() {
     visitednodes = [
         [startBox.xpos, startBox.ypos]
     ];
-    while (true) {
-        marker = 0;
-        if (nodes.length == 0) {
-            break;
-        }
-        for (i = 0; i < nodes.length; i++) {
-            if (nodes[i][0] + 40 <= 1480 && !inset(visitednodes, nodes[i][0] + 40, nodes[i][1]) && !inset(wallSet, nodes[i][0] + 40, nodes[i][1])) {
-                if ((nodes[i][0] + 40 == endBox.xpos) && (nodes[i][1] == endBox.ypos)) {
-                    marker = 1;
-                    break;
-                }
+    add(nodes, newnodes, visitednodes);
+}
 
-                draw(nodes[i][0] + 40, nodes[i][1]);
-                newnodes.push([nodes[i][0] + 40, nodes[i][1]]);
-                visitednodes.push([nodes[i][0] + 40, nodes[i][1]]);
-            }
-            if (nodes[i][0] - 40 >= 0 && !inset(visitednodes, nodes[i][0] - 40, nodes[i][1]) && !inset(wallSet, nodes[i][0] - 40, nodes[i][1])) {
-                if ((nodes[i][0] - 40 == endBox.xpos) && (nodes[i][1] == endBox.ypos)) {
-                    marker = 1;
-                    break;
-                }
 
-                draw(nodes[i][0] - 40, nodes[i][1]);
-
-                newnodes.push([nodes[i][0] - 40, nodes[i][1]]);
-                visitednodes.push([nodes[i][0] - 40, nodes[i][1]]);
-            }
-            if (nodes[i][1] + 40 <= 800 && !inset(visitednodes, nodes[i][0], nodes[i][1] + 40) && !inset(wallSet, nodes[i][0], nodes[i][1] + 40)) {
-                if ((nodes[i][0] == endBox.xpos) && (nodes[i][1] + 40 == endBox.ypos)) {
-                    marker = 1;
-                    break;
-                }
-
-                draw(nodes[i][0], nodes[i][1] + 40);
-
-                newnodes.push([nodes[i][0], nodes[i][1] + 40]);
-                visitednodes.push([nodes[i][0], nodes[i][1] + 40]);
-            }
-            if (nodes[i][1] - 40 >= 0 && !inset(visitednodes, nodes[i][0], nodes[i][1] - 40) && !inset(wallSet, nodes[i][0], nodes[i][1] - 40)) {
-                if ((nodes[i][0] == endBox.xpos) && (nodes[i][1] - 40 == endBox.ypos)) {
-                    marker = 1;
-                    break;
-                }
-
-                draw(nodes[i][0], nodes[i][1] - 40);
-                newnodes.push([nodes[i][0], nodes[i][1] - 40]);
-                visitednodes.push([nodes[i][0], nodes[i][1] - 40]);
-            }
-        }
-        syncWait(1000);
-        nodes = [];
-        nodes = newnodes;
-        newnodes = [];
-        console.log(nodes);
-        if (marker == 1) {
-            alert("FOUND IT!");
-            break;
-        }
-
+function add(nodes, newnodes, visitednodes) {
+    if (nodes.length == 0) {
+        alert("FOUND IT!");
+        return;
     }
+    nodes.forEach(function (item) {
+        setTimeout(x => {
+            console.log(item);
+            console.log(this.visitednodes);
+            if (item[0] + 40 <= 1480 && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
+                if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
+                    marker = 1;
+
+                }
+                newnodes.push([item[0] + 40, item[1]]);
+                visitednodes.push([item[0] + 40, item[1]]);
+                draw(item[0] + 40, item[1]);
+
+            }
+            if (item[0] - 40 >= 0 && !inset(visitednodes, item[0] - 40, item[1]) && !inset(wallSet, item[0] - 40, item[1])) {
+                if ((item[0] - 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
+                    marker = 1;
+
+                }
+                newnodes.push([item[0] - 40, item[1]]);
+                visitednodes.push([item[0] - 40, item[1]]);
+                draw(item[0] - 40, item[1]);
+
+
+            }
+            if (item[1] + 40 <= 800 && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
+                if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
+                    marker = 1;
+
+                }
+                newnodes.push([item[0], item[1] + 40]);
+                visitednodes.push([item[0], item[1] + 40]);
+                draw(item[0], item[1] + 40);
+
+            }
+            if (item[1] - 40 >= 0 && !inset(visitednodes, item[0], item[1] - 40) && !inset(wallSet, item[0], item[1] - 40)) {
+                if ((item[0] == endBox.xpos) && (item[1] - 40 == endBox.ypos)) {
+                    marker = 1;
+
+                }
+                newnodes.push([item[0], item[1] - 40]);
+                visitednodes.push([item[0] + 40, item[1] - 40]);
+                draw(item[0], item[1] - 40);
+            }
+        }, 100);
+
+
+    });
+    console.log(newnodes.length);
+    setTimeout(() => {
+        add(newnodes, [], visitednodes);
+    }, 1000)
 
 }
