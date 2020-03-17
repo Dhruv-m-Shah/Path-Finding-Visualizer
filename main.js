@@ -114,15 +114,21 @@ function start_block(xpos, ypos) {
 }
 
 function end_block(xpos, ypos) {
+    xpos = xpos - 28 - 200;
+    ypos = ypos - 28;
+    var x = Math.floor(xpos / 40) * 40;
+    var y = Math.floor(ypos / 40) * 40;
+    if (x < 0 || x > 1480 || y < 0 || y > 800) {
+        return;
+    }
     if (endBox.xpos != -1 && endBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
         context.stroke();
     }
-    xpos = xpos - 28 - 200;
-    ypos = ypos - 28;
-    var x = Math.floor(xpos / 40) * 40;
-    var y = Math.floor(ypos / 40) * 40;
+
+    console.log(x, y);
+
     endBox.xpos = x;
     endBox.ypos = y;
     context.fillStyle = "#a11d1f";
@@ -231,6 +237,9 @@ newnodes = []
 visitednodes = []
 
 function draw(xpos, ypos) {
+    if (xpos == endBox.xpos && ypos == endBox.ypos) {
+        return;
+    }
     context.fillStyle = "#FF0000";
     context.fillRect(xpos, ypos, 40, 40);
     context.stroke();
@@ -255,23 +264,28 @@ function bfs() {
     visitednodes = [
         [startBox.xpos, startBox.ypos]
     ];
-    add(nodes, newnodes, visitednodes);
+    add(nodes, newnodes, visitednodes, 1);
 }
 
 
-function add(nodes, newnodes, visitednodes) {
+function add(nodes, newnodes, visitednodes, marker) {
     if (nodes.length == 0) {
-        alert("FOUND IT!");
+        alert("Didn't find it :(");
+        return;
+    }
+    if(marker == 0){
         return;
     }
     nodes.forEach(function (item) {
+    
         setTimeout(x => {
             console.log(item);
-            console.log(this.visitednodes);
+            console.log(visitednodes);
             if (item[0] + 40 <= 1480 && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
                 if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                    marker = 1;
-
+                    alert("FOUND IT!");
+                    marker = 0;
+                    return;
                 }
                 newnodes.push([item[0] + 40, item[1]]);
                 visitednodes.push([item[0] + 40, item[1]]);
@@ -280,19 +294,20 @@ function add(nodes, newnodes, visitednodes) {
             }
             if (item[0] - 40 >= 0 && !inset(visitednodes, item[0] - 40, item[1]) && !inset(wallSet, item[0] - 40, item[1])) {
                 if ((item[0] - 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                    marker = 1;
+                    alert("FOUND IT!");
+                    marker = 0;
+                    return;
 
                 }
                 newnodes.push([item[0] - 40, item[1]]);
                 visitednodes.push([item[0] - 40, item[1]]);
                 draw(item[0] - 40, item[1]);
-
-
             }
             if (item[1] + 40 <= 800 && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
                 if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
-                    marker = 1;
-
+                    alert("FOUND IT!");
+                    marker = 0;
+                    return;
                 }
                 newnodes.push([item[0], item[1] + 40]);
                 visitednodes.push([item[0], item[1] + 40]);
@@ -301,8 +316,9 @@ function add(nodes, newnodes, visitednodes) {
             }
             if (item[1] - 40 >= 0 && !inset(visitednodes, item[0], item[1] - 40) && !inset(wallSet, item[0], item[1] - 40)) {
                 if ((item[0] == endBox.xpos) && (item[1] - 40 == endBox.ypos)) {
-                    marker = 1;
-
+                    alert("FOUND IT!");
+                    marker = 0;
+                    return;
                 }
                 newnodes.push([item[0], item[1] - 40]);
                 visitednodes.push([item[0] + 40, item[1] - 40]);
@@ -312,9 +328,10 @@ function add(nodes, newnodes, visitednodes) {
 
 
     });
-    console.log(newnodes.length);
+    console.log("DDDD");
+    console.log(endBox);
     setTimeout(() => {
-        add(newnodes, [], visitednodes);
+        add(newnodes, [], visitednodes, marker);
     }, 1000)
 
 }
