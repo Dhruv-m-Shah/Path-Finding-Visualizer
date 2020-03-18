@@ -237,14 +237,14 @@ newnodes = []
 visitednodes = []
 
 function draw(xpos, ypos) {
+    console.log("ABCDEFG!");
+    console.log(xpos, ypos);
     if (xpos == endBox.xpos && ypos == endBox.ypos) {
         return;
     }
     context.fillStyle = "#FF0000";
     context.fillRect(xpos, ypos, 40, 40);
     context.stroke();
-    newnodes.push([xpos, ypos]);
-    visitednodes.push([xpos, ypos]);
 }
 
 const syncWait = ms => {
@@ -269,69 +269,64 @@ function bfs() {
 
 
 function add(nodes, newnodes, visitednodes, marker) {
+    if (marker == 0) {
+        return;
+    }
+
     if (nodes.length == 0) {
         alert("Didn't find it :(");
         return;
     }
-    if(marker == 0){
-        return;
-    }
+
     nodes.forEach(function (item) {
-    
-        setTimeout(x => {
-            console.log(item);
-            console.log(visitednodes);
-            if (item[0] + 40 <= 1480 && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
-                if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                    alert("FOUND IT!");
-                    marker = 0;
-                    return;
-                }
-                newnodes.push([item[0] + 40, item[1]]);
-                visitednodes.push([item[0] + 40, item[1]]);
-                draw(item[0] + 40, item[1]);
+        console.log(item);
+        console.log(visitednodes);
+        if (item[0] + 40 <= 1480 && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
+            if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
+                alert("FOUND IT!");
+                marker = 0;
+                return;
+            }
+            newnodes.push([item[0] + 40, item[1]]);
+            visitednodes.push([item[0] + 40, item[1]]);
+            draw(item[0] + 40, item[1]);
+        }
+        if (item[0] - 40 >= 0 && !inset(visitednodes, item[0] - 40, item[1]) && !inset(wallSet, item[0] - 40, item[1])) {
+            if ((item[0] - 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
+                alert("FOUND IT!");
+                marker = 0;
+                return;
 
             }
-            if (item[0] - 40 >= 0 && !inset(visitednodes, item[0] - 40, item[1]) && !inset(wallSet, item[0] - 40, item[1])) {
-                if ((item[0] - 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                    alert("FOUND IT!");
-                    marker = 0;
-                    return;
-
-                }
-                newnodes.push([item[0] - 40, item[1]]);
-                visitednodes.push([item[0] - 40, item[1]]);
-                draw(item[0] - 40, item[1]);
+            newnodes.push([item[0] - 40, item[1]]);
+            visitednodes.push([item[0] - 40, item[1]]);
+            draw(item[0] - 40, item[1]);
+        }
+        if (item[1] + 40 <= 800 && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
+            if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
+                alert("FOUND IT!");
+                marker = 0;
+                return;
             }
-            if (item[1] + 40 <= 800 && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
-                if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
-                    alert("FOUND IT!");
-                    marker = 0;
-                    return;
-                }
-                newnodes.push([item[0], item[1] + 40]);
-                visitednodes.push([item[0], item[1] + 40]);
-                draw(item[0], item[1] + 40);
+            newnodes.push([item[0], item[1] + 40]);
+            visitednodes.push([item[0], item[1] + 40]);
+            draw(item[0], item[1] + 40);
 
+        }
+        if (item[1] - 40 >= 0 && !inset(visitednodes, item[0], item[1] - 40) && !inset(wallSet, item[0], item[1] - 40)) {
+            if ((item[0] == endBox.xpos) && (item[1] - 40 == endBox.ypos)) {
+                alert("FOUND IT!");
+                marker = 0;
+                return;
             }
-            if (item[1] - 40 >= 0 && !inset(visitednodes, item[0], item[1] - 40) && !inset(wallSet, item[0], item[1] - 40)) {
-                if ((item[0] == endBox.xpos) && (item[1] - 40 == endBox.ypos)) {
-                    alert("FOUND IT!");
-                    marker = 0;
-                    return;
-                }
-                newnodes.push([item[0], item[1] - 40]);
-                visitednodes.push([item[0] + 40, item[1] - 40]);
-                draw(item[0], item[1] - 40);
-            }
-        }, 100);
-
-
+            newnodes.push([item[0], item[1] - 40]);
+            visitednodes.push([item[0], item[1] - 40]);
+            draw(item[0], item[1] - 40);
+        }
     });
-    console.log("DDDD");
-    console.log(endBox);
+    console.log(visitednodes);
     setTimeout(() => {
         add(newnodes, [], visitednodes, marker);
-    }, 1000)
+    }, 100)
 
 }
