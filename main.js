@@ -194,6 +194,7 @@ function wall_state() {
 function clear_slate() {
     state_val = 0;
     wallSet = []
+    visitednodes = [];
     startBox.xpos = -1;
     startBox.ypos = -1;
     endBox.xpos = -1;
