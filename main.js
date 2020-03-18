@@ -73,12 +73,16 @@ function lightUpSquare(xpos, ypos) {
     if (inset(wallSet, x, y)) {
         return;
     }
+    if(inset(visitednodes, x, y)){
+        return;
+    }
     console.log(x, y);
 
     if (x != previousGrid.xpos || y != previousGrid.ypos) {
         if ((previousGrid.xpos == startBox.xpos && previousGrid.ypos == startBox.ypos) ||
             (previousGrid.xpos == endBox.xpos && previousGrid.ypos == endBox.ypos) ||
-            inset(wallSet, previousGrid.xpos, previousGrid.ypos)) {
+            inset(wallSet, previousGrid.xpos, previousGrid.ypos) || 
+            inset(visitednodes, previousGrid.xpos, previousGrid.ypos)) {
             context.fillStyle = "#FF0000";
             context.fillRect(x, y, 40, 40);
             context.stroke();
@@ -97,15 +101,18 @@ function lightUpSquare(xpos, ypos) {
 }
 
 function start_block(xpos, ypos) {
+    xpos = xpos - 28 - 200;
+    ypos = ypos - 28;
+    var x = Math.floor(xpos / 40) * 40;
+    var y = Math.floor(ypos / 40) * 40;
+    if (x < 0 || x > 1480 || y < 0 || y > 800) {
+        return;
+    }
     if (startBox.xpos != -1 && startBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(startBox.xpos, startBox.ypos, 40, 40);
         context.stroke();
     }
-    xpos = xpos - 28 - 200;
-    ypos = ypos - 28;
-    var x = Math.floor(xpos / 40) * 40;
-    var y = Math.floor(ypos / 40) * 40;
     startBox.xpos = x;
     startBox.ypos = y;
     context.fillStyle = "#00FF00";
