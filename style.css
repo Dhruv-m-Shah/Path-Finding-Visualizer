@@ -32,7 +32,7 @@
     height: 50px;
 }
 
-.btn.btn-primary.clear{
+.btn.btn-primary.clear {
     position: absolute;
     top: 250px;
     left: 50px;
@@ -54,7 +54,8 @@
     top: 380px;
     min-width: 100px;
 }
-#dropdownMenuButton{
+
+#dropdownMenuButton {
     min-width: 150px;
     top: 250px;
 
@@ -64,4 +65,81 @@
     position: relative;
     left: 200px;
     z-index: -2;
+}
+
+.logo {
+    max-width: 80px;
+    margin-right: 10px;
+    max-height: auto;
+}
+
+.start {
+    transform: translateY(-8px);
+    float: left;
+    max-width: 40px;
+    max-height: auto;
+}
+
+.nav-link.start {
+    font-size: 20px;
+    margin-left: 60px;
+}
+
+.nav-link.dropdown-toggle.alog {
+    transform: translateY(-3px);
+    font-size: 18px;
+    margin-left: 184px;
+    color: black;
+}
+
+.dropdown-menu.alog {
+    margin-left: 184px;
+}
+
+.start-div {
+    display: inline;
+}
+
+.nav-item.active.start {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 90px;
+}
+
+.nav-item.active.end {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 98px;
+}
+
+.end {
+    transform: translateY(5px);
+    margin-right: 10px;
+    float: left;
+    max-width: 20px;
+    height: auto;
+}
+
+.brick {
+    margin-right: 10px;
+    transform: translateY(4px);
+    float: left;
+    max-width: 20px;
+    max-height: auto;
+}
+
+.nav-item.active.wall {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 198px;
+}
+
+.nav-item.active.startalgo {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 150px;
 }

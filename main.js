@@ -32,6 +32,7 @@ context.beginPath();
 function drawBoard() {
     for (var x = 0; x <= bw; x += 40) {
         for (var y = 0; y <= bh; y += 40) {
+            context.strokeStyle = "#a1e7f7";
             context.rect(x, y, 40, 40);
         }
     }
@@ -83,7 +84,7 @@ function lightUpSquare(xpos, ypos) {
             (previousGrid.xpos == endBox.xpos && previousGrid.ypos == endBox.ypos) ||
             inset(wallSet, previousGrid.xpos, previousGrid.ypos) ||
             inset(visitednodes, previousGrid.xpos, previousGrid.ypos)) {
-            context.fillStyle = "#FF0000";
+            context.fillStyle = "#32d6db";
             context.fillRect(x, y, 40, 40);
             context.stroke();
             previousGrid.xpos = x;
@@ -92,7 +93,7 @@ function lightUpSquare(xpos, ypos) {
         }
         context.fillStyle = "#FFFFFF"
         context.fillRect(previousGrid.xpos, previousGrid.ypos, 40, 40);
-        context.fillStyle = "#FF0000";
+        context.fillStyle = "#32d6db";
         context.fillRect(x, y, 40, 40);
         context.stroke();
         previousGrid.xpos = x;
@@ -158,20 +159,20 @@ function wall_block(xpos, ypos) {
 document.onclick = function (event) {
 
     if (state_val == 1) {
-        start_block(event.pageX + 10, event.pageY + 10);
+        start_block(event.pageX + 10, event.pageY - 46);
     }
 
     if (state_val == 2) {
-        end_block(event.pageX + 10, event.pageY + 10);
+        end_block(event.pageX + 10, event.pageY - 46);
     }
 
     if (state_val == 3) {
-        wall_block(event.pageX + 10, event.pageY + 10);
+        wall_block(event.pageX + 10, event.pageY - 46);
     }
 
 };
 onmousemove = function (e) {
-    lightUpSquare(event.pageX, event.pageY);
+    lightUpSquare(event.pageX, event.pageY-56);
 
 }
 
@@ -252,7 +253,7 @@ function draw(xpos, ypos) {
     if (xpos == endBox.xpos && ypos == endBox.ypos) {
         return;
     }
-    context.fillStyle = "#FF0000";
+    context.fillStyle = "#32d6db";
     context.fillRect(xpos, ypos, 40, 40);
     context.stroke();
 }
@@ -263,7 +264,7 @@ function draw_yellow(xpos, ypos) {
     if (xpos == startBox.xpos && ypos == startBox.ypos) {
         return;
     }
-    context.fillStyle = "#ffff00";
+    context.fillStyle = "#18859e";
     context.fillRect(xpos, ypos, 40, 40);
     context.stroke();
 }

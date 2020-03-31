@@ -1,46 +1,75 @@
 <html>
 
 <head>
-    <title>Path Finding Visualizer</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <title>Path Finding Visualizer</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img class="logo" src="imgs\Logo.png"> Path Finding Visualizer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active start">
+        <div onclick="start_state()">
+          <img class="start" src="imgs/flag.png">
+          <p>Start Node</p>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle alog" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Pick Algorithm
+        </a>
+        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
+          <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
+          <a class="dropdown-item" href="#" onclick="bfs_mode()">BFS</a>
+        </div>
+      </li>
+      <li class="nav-item active end">
+        <div onclick="end_state()">
+          <img class="end" src="imgs/End.png">
+          <p>End Node</p>
+        </div>
+      </li>
+      <li class="nav-item active wall">
+        <div onclick="wall_state()">
+          <img class="brick" src="imgs/Brick.svg">
+          <p>Draw Wall</p>
+        </div>
+      </li>
+      <li class="nav-item active startalgo">
+        <div onclick="start_algo()">
+          <img class="brick" src="imgs/start.svg">
+          <p>Start Path Finding</p>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
 
 <body style=" background: lightblue;">
 
-    <div class="selectorbox">
-        <button type="button" class="btn btn-primary start_point" onclick ="start_state()">Start</button>
-        <button type="button" class="btn btn-primary end_point" onclick ="end_state()">End</button>
-        <button type="button" class="btn btn-primary draw_wall" onclick ="wall_state()">Draw Wall</button>
-        <button type="button" class="btn btn-primary clear" onclick ="clear_slate()">Clear</button>
-        <div class="dropdown algo">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Pick Algorithm
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
-                <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
-                <a class="dropdown-item" href="#" onclick = "bfs_mode()">BFS</a>
-            </div>
-        </div>
-        <div class="col text-center">
-            <button type="button" class="btn btn-success start" onclick = "start_algo()">Start</button>
-        </div>
-    </div>
-    <canvas class="drawingboard" id="c" style="background: #fff; margin:20px"></canvas>
+
+  <canvas class="drawingboard" id="c" style="background: #fff; margin:20px"></canvas>
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="main.js"></script>
