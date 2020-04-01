@@ -133,12 +133,27 @@ function start_block(xpos, ypos) {
     context.stroke();
     var img = document.createElement("img");
     img.src = "imgs\\flag.png";
-    context.drawImage(img, x-6, y-10, 60, 60);
     startBox.xpos = x;
     startBox.ypos = y;
-
+    landing_animation_start(img, x-6, y-10, 30, 0);
 
 }
+
+function landing_animation_start(img, xpos, ypos, size, count){
+    if(count == 30){
+        return;
+    }
+    context.fillStyle = "#FFFFFF";
+    context.fillRect(xpos+6, ypos+10, 40, 40);
+    context.stroke();
+    context.drawImage(img, xpos, ypos+1, 30+count, 30+count);
+    
+    setTimeout(() => {
+        landing_animation_start(img, xpos, ypos, size, count+1);
+    }, 5)
+
+}
+
 
 function end_block(xpos, ypos) {
     xpos = xpos - 28 - 200;
@@ -158,11 +173,28 @@ function end_block(xpos, ypos) {
     context.fillStyle = "#FFFFFF";
     context.fillRect(x, y, 40, 40);
     context.stroke();
+    endBox.xpos = x;
+    endBox.ypos = y;
     var img = document.createElement("img");
     img.src = "imgs\\End.png";
     context.drawImage(img, x+5, y+5, 30, 30);
-    endBox.xpos = x;
-    endBox.ypos = y;
+    landing_animation_end(img, x+5, y+5, 0, 0);
+
+}
+
+
+function landing_animation_end(img, xpos, ypos, size, count){
+    if(count == 30){
+        return;
+    }
+    context.fillStyle = "#FFFFFF";
+    context.fillRect(xpos-5, ypos-5, 40, 40);
+    context.stroke();
+    context.drawImage(img, xpos, ypos, count, count);
+    
+    setTimeout(() => {
+        landing_animation_end(img, xpos, ypos, size, count+1);
+    }, 5)
 
 }
 
@@ -188,16 +220,25 @@ document.onclick = function (event) {
         end_block(event.pageX + 197, event.pageY - 88);
     }
 
-    if (state_val == 3) {
-        wall_block(event.pageX + 197, event.pageY - 88);
-    }
-
 };
 onmousemove = function (e) {
-    lightUpSquare(event.pageX + 197, event.pageY - 88);
+    if(state_val == 3 && mouseDown){
+        wall_block(event.pageX + 197, event.pageY - 88);
+    }
+    else{
+        lightUpSquare(event.pageX + 180, event.pageY - 94);
+    }
 
 }
 
+
+var mouseDown = 0;
+document.body.onmousedown = function() { 
+  mouseDown = 1;
+}
+document.body.onmouseup = function() {
+    mouseDown = 0;
+}
 
 
 var state_var = 0;
@@ -327,7 +368,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
         console.log(visitednodes);
         if (item[0] + 40 <= maxwidth && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
             if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                alert("FOUND IT!");
                 marker = 0;
                 cameFrom.push([item, [item[0] + 40, item[1]]]);
                 drawPath(cameFrom, [endBox.xpos, endBox.ypos]);
@@ -340,7 +380,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
         }
         if (item[0] - 40 >= 0 && !inset(visitednodes, item[0] - 40, item[1]) && !inset(wallSet, item[0] - 40, item[1])) {
             if ((item[0] - 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
-                alert("FOUND IT!");
                 marker = 0;
                 cameFrom.push([item, [item[0] - 40, item[1]]]);
                 drawPath(cameFrom, [endBox.xpos, endBox.ypos]);
@@ -354,7 +393,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
         }
         if (item[1] + 40 <= maxheight && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
             if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
-                alert("FOUND IT!");
                 marker = 0;
                 cameFrom.push([item, [item[0], item[1] + 40]]);
                 drawPath(cameFrom, [endBox.xpos, endBox.ypos]);
@@ -368,7 +406,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
         }
         if (item[1] - 40 >= 0 && !inset(visitednodes, item[0], item[1] - 40) && !inset(wallSet, item[0], item[1] - 40)) {
             if ((item[0] == endBox.xpos) && (item[1] - 40 == endBox.ypos)) {
-                alert("FOUND IT!");
                 marker = 0;
                 cameFrom.push([item, [item[0], item[1] - 40]]);
                 drawPath(cameFrom, [endBox.xpos, endBox.ypos]);
