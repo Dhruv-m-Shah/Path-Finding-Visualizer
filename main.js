@@ -30,8 +30,6 @@ var bh = window.innerHeight - 120;
 var p = 10;
 maxwidth = (Math.floor(window.innerWidth / 40) - 3) * 40;
 maxheight = (Math.floor(window.innerHeight / 40) - 3) * 40;
-console.log(maxheight);
-console.log(bh);
 // Box width
 context.beginPath();
 
@@ -96,7 +94,6 @@ function lightUpSquare(xpos, ypos) {
     if (inset(visitednodes, x, y)) {
         return;
     }
-    console.log(x, y);
 
     if (x != previousGrid.xpos || y != previousGrid.ypos) {
         if ((previousGrid.xpos == startBox.xpos && previousGrid.ypos == startBox.ypos) ||
@@ -138,6 +135,7 @@ function start_block(xpos, ypos) {
     context.stroke();
     var img = document.createElement("img");
     img.src = "imgs\\flag.png";
+    context.imageSmoothingEnabled = false;
     startBox.xpos = x;
     startBox.ypos = y;
     landing_animation_start(img, x - 6, y - 10, 30, 0);
@@ -176,7 +174,6 @@ function end_block(xpos, ypos) {
         context.stroke();
     }
 
-    console.log(x, y);
     context.fillStyle = "#FFFFFF";
     context.fillRect(x, y, 40, 40);
     context.stroke();
@@ -194,7 +191,6 @@ function end_block(xpos, ypos) {
 
 function landing_animation_end(img, xpos, ypos, size, count) {
     if (count == 30) {
-        console.log("DDDDD");
         return;
     }
     if (wall_marker == 1) {
@@ -299,16 +295,18 @@ function clear_slate() {
 function aStar_mode() {
     algorithm = 1;
     $("#dropdownMenuButton").text('A*');
+    document.getElementById("navbarDropdown").innerText = 'A*';
 }
 
 function dijkstra_mode() {
+
     algorithm = 2;
-    $("#dropdownMenuButton").text('dijkstra');
+    document.getElementById("navbarDropdown").innerText = 'Dijkstra';
 }
 
 function bfs_mode() {
     algorithm = 3;
-    document.getElementById("navbarDropdown").innerText='BFS';
+    document.getElementById("navbarDropdown").innerText = 'BFS';
 }
 
 function start_algo() {
@@ -330,7 +328,6 @@ visitednodes = []
 cameFrom = []
 
 function draw(xpos, ypos) {
-    console.log("ABCDEFG!");
     console.log(xpos, ypos);
     if (xpos == endBox.xpos && ypos == endBox.ypos) {
         return;
@@ -340,15 +337,19 @@ function draw(xpos, ypos) {
     context.stroke();
 }
 
-function draw_yellow(xpos, ypos) {
-    console.log("BOII");
-    console.log(xpos, ypos);
+function draw_aqua(xpos, ypos, count) {
+    if (count == 42) {
+        return;
+    }
     if (xpos == startBox.xpos && ypos == startBox.ypos) {
         return;
     }
     context.fillStyle = "#18859e";
-    context.fillRect(xpos, ypos, 40, 40);
+    context.fillRect(xpos, ypos, count, count);
     context.stroke();
+    setTimeout(() => {
+        draw_aqua(xpos, ypos, count+2);
+    }, 5)
 }
 
 const syncWait = ms => {
@@ -359,11 +360,9 @@ const syncWait = ms => {
 newnodes1 = [];
 
 function bfs() {
-    console.log("AD");
     nodes = [
         [startBox.xpos, startBox.ypos]
     ];
-    console.log(nodes[0][0]);
     newnodes = [];
     visitednodes = [
         [startBox.xpos, startBox.ypos]
@@ -383,8 +382,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
     }
 
     nodes.forEach(function (item) {
-        console.log(item);
-        console.log(visitednodes);
         if (item[0] + 40 <= bw && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
             if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
                 marker = 0;
@@ -436,7 +433,6 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
             draw(item[0], item[1] - 40);
         }
     });
-    console.log(visitednodes);
     setTimeout(() => {
         add(newnodes, [], visitednodes, marker, cameFrom);
     }, 100)
@@ -446,7 +442,7 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
 function drawPath(cameFrom, curBox) {
     for (let i = 0; i < cameFrom.length; i++) {
         if (curBox[0] == cameFrom[i][1][0] && curBox[1] == cameFrom[i][1][1]) {
-            draw_yellow(cameFrom[i][0][0], cameFrom[i][0][1]);
+            draw_aqua(cameFrom[i][0][0], cameFrom[i][0][1], 0);
             setTimeout(() => {
                 drawPath(cameFrom, cameFrom[i][0])
             }, 100);

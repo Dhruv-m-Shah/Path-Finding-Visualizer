@@ -3,6 +3,7 @@
     position: relative;
     left: 20px;
     z-index: -2;
+    image-rendering: pixelated;
 }
 
 .logo {
@@ -21,9 +22,10 @@
 
 .nav-link.dropdown-toggle.alog {
     transform: translateY(-3px);
-    font-size: 18px;
     margin-left: 184px;
     color: black;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .dropdown-menu.alog {
@@ -34,14 +36,7 @@
     display: inline;
 }
 
-canvas {  
-    width: 512px;
-    height: 512px;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
-  }
+
 
 .nav-item.active.start {
     transform: translateY(5px);
@@ -96,4 +91,9 @@ canvas {
 .click{
     display: block;
     cursor: pointer;
+}
+
+.navbarText{
+    font-size: 20px;
+    font-weight: bold;
 }
