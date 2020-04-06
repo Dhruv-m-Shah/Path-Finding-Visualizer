@@ -15,11 +15,14 @@ endBox = new location1(-1, -1) // Location of the "end" node
 wallSet = []; // Look for walls (Using array for now, problem with javascript SET and unique objects)
 
 algorithm = 0; // What algorithm to be used (1 -> A*,  2 -> dijkstra's, 3 -> BFS)
+wall_marker = 0;
 
 var htmlCanvas = document.getElementById('c');
 var context = htmlCanvas.getContext("2d");
 htmlCanvas.width = (Math.floor(window.innerWidth / 40) - 2) * 40;
 htmlCanvas.height = (Math.floor(window.innerHeight / 40) - 3) * 40;
+htmlCanvas.style.width  = htmlCanvas.width.toString() + "px";
+htmlCanvas.style.height = htmlCanvas.height.toString() + "px";
 var bw = window.innerWidth - 120;
 // Box height
 var bh = window.innerHeight - 120;
@@ -30,6 +33,7 @@ maxheight = (Math.floor(window.innerHeight / 40) - 3) * 40;
 
 // Box width
 context.beginPath();
+
 
 function reportWindowSize() {
     htmlCanvas.width = (Math.floor(window.innerWidth / 40) - 2) * 40;
@@ -135,21 +139,22 @@ function start_block(xpos, ypos) {
     img.src = "imgs\\flag.png";
     startBox.xpos = x;
     startBox.ypos = y;
-    landing_animation_start(img, x-6, y-10, 30, 0);
+    landing_animation_start(img, x - 6, y - 10, 30, 0);
 
 }
 
-function landing_animation_start(img, xpos, ypos, size, count){
-    if(count == 30){
+function landing_animation_start(img, xpos, ypos, size, count) {
+    if (count == 30) {
         return;
     }
     context.fillStyle = "#FFFFFF";
-    context.fillRect(xpos+6, ypos+10, 40, 40);
+    context.fillRect(xpos + 6, ypos + 10, 40, 40);
     context.stroke();
-    context.drawImage(img, xpos, ypos+1, 30+count, 30+count);
-    
+    context.imageSmoothingEnabled = false;
+    context.drawImage(img, xpos, ypos + 1, 30 + count, 30 + count);
+
     setTimeout(() => {
-        landing_animation_start(img, xpos, ypos, size, count+1);
+        landing_animation_start(img, xpos, ypos, size, count + 1);
     }, 5)
 
 }
@@ -163,6 +168,7 @@ function end_block(xpos, ypos) {
     if (x < 0 || x > maxwidth || y < 0 || y > maxheight) {
         return;
     }
+    
     if (endBox.xpos != -1 && endBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
@@ -177,23 +183,33 @@ function end_block(xpos, ypos) {
     endBox.ypos = y;
     var img = document.createElement("img");
     img.src = "imgs\\End.png";
-    context.drawImage(img, x+5, y+5, 30, 30);
-    landing_animation_end(img, x+5, y+5, 0, 0);
+    context.imageSmoothingEnabled = false;
+    context.drawImage(img, x + 5, y + 5, 30, 30);
+    wall_marker = 0;
+    landing_animation_end(img, x + 5, y + 5, 0, 0);
 
 }
 
 
-function landing_animation_end(img, xpos, ypos, size, count){
-    if(count == 30){
+function landing_animation_end(img, xpos, ypos, size, count) {
+    if (count == 30) {
+        console.log("DDDDD");
+        return;
+    }
+    if(wall_marker == 1){
+        context.fillStyle = "#FFFFFF";
+        context.fillRect(xpos - 5, ypos - 5, 40, 40);
+        context.stroke();
         return;
     }
     context.fillStyle = "#FFFFFF";
-    context.fillRect(xpos-5, ypos-5, 40, 40);
+    context.fillRect(xpos - 5, ypos - 5, 40, 40);
     context.stroke();
+    context.imageSmoothingEnabled = false;
     context.drawImage(img, xpos, ypos, count, count);
-    
+
     setTimeout(() => {
-        landing_animation_end(img, xpos, ypos, size, count+1);
+        landing_animation_end(img, xpos, ypos, size, count + 1);
     }, 5)
 
 }
@@ -210,6 +226,8 @@ function wall_block(xpos, ypos) {
 }
 
 
+
+
 document.onclick = function (event) {
 
     if (state_val == 1) {
@@ -217,15 +235,15 @@ document.onclick = function (event) {
     }
 
     if (state_val == 2) {
+        wall_marker = 1;
         end_block(event.pageX + 197, event.pageY - 88);
     }
 
 };
 onmousemove = function (e) {
-    if(state_val == 3 && mouseDown){
+    if (state_val == 3 && mouseDown) {
         wall_block(event.pageX + 197, event.pageY - 88);
-    }
-    else{
+    } else {
         lightUpSquare(event.pageX + 180, event.pageY - 94);
     }
 
@@ -233,10 +251,10 @@ onmousemove = function (e) {
 
 
 var mouseDown = 0;
-document.body.onmousedown = function() { 
-  mouseDown = 1;
+document.body.onmousedown = function () {
+    mouseDown = 1;
 }
-document.body.onmouseup = function() {
+document.body.onmouseup = function () {
     mouseDown = 0;
 }
 

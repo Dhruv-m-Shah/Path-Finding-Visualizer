@@ -1,59 +1,5 @@
-.selectorbox {
-    top: 50%;
-    position: fixed;
-    width: 200px;
-    height: 600px;
-    background-color: #a81b29;
-    transform: translateY(-300px);
-
-}
-
-.btn.btn-primary.start_point {
-    position: absolute;
-    top: 40px;
-    left: 50px;
-    width: 100px;
-    height: 50px;
-}
-
-.btn.btn-primary.end_point {
-    position: absolute;
-    top: 110px;
-    left: 50px;
-    width: 100px;
-    height: 50px;
-}
-
-.btn.btn-primary.draw_wall {
-    position: absolute;
-    top: 180px;
-    left: 50px;
-    width: 100px;
-    height: 50px;
-}
-
-.btn.btn-primary.clear {
-    position: absolute;
-    top: 250px;
-    left: 50px;
-    width: 100px;
-    height: 50px;
-}
 
 
-
-.dropdown.algo {
-    position: absolute;
-    left: 25px;
-    top: 320px;
-}
-
-.btn.btn-success.start {
-    position: absolute;
-    left: 50px;
-    top: 380px;
-    min-width: 100px;
-}
 
 #dropdownMenuButton {
     min-width: 150px;
@@ -92,6 +38,7 @@
     color: black;
 }
 
+
 .dropdown-menu.alog {
     margin-left: 184px;
 }
@@ -100,11 +47,20 @@
     display: inline;
 }
 
+canvas {  
+    width: 512px;
+    height: 512px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
 .nav-item.active.start {
     transform: translateY(5px);
     white-space: nowrap;
     font-size: 18px;
     margin-left: 90px;
+    cursor: pointer;
 }
 
 .nav-item.active.end {
@@ -112,6 +68,7 @@
     white-space: nowrap;
     font-size: 18px;
     margin-left: 98px;
+    cursor: pointer;
 }
 
 .end {
@@ -120,6 +77,7 @@
     float: left;
     max-width: 20px;
     height: auto;
+    cursor: pointer;
 }
 
 .brick {
@@ -128,6 +86,7 @@
     float: left;
     max-width: 20px;
     max-height: auto;
+    cursor: pointer;
 }
 
 .nav-item.active.wall {
@@ -135,6 +94,7 @@
     white-space: nowrap;
     font-size: 18px;
     margin-left: 198px;
+    cursor: pointer;
 }
 
 .nav-item.active.startalgo {
@@ -142,4 +102,9 @@
     white-space: nowrap;
     font-size: 18px;
     margin-left: 150px;
+    cursor: pointer;
+}
+.click{
+    display: block;
+    cursor: pointer;
 }
