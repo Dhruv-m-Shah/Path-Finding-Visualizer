@@ -185,7 +185,6 @@ function end_block(xpos, ypos) {
     context.drawImage(img, x + 5, y + 5, 30, 30);
     wall_marker = 0;
     landing_animation_end(img, x + 5, y + 5, 0, 0);
-
 }
 
 
