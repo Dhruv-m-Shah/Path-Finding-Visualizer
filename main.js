@@ -21,16 +21,17 @@ var htmlCanvas = document.getElementById('c');
 var context = htmlCanvas.getContext("2d");
 htmlCanvas.width = (Math.floor(window.innerWidth / 40) - 2) * 40;
 htmlCanvas.height = (Math.floor(window.innerHeight / 40) - 3) * 40;
-htmlCanvas.style.width  = htmlCanvas.width.toString() + "px";
+htmlCanvas.style.width = htmlCanvas.width.toString() + "px";
 htmlCanvas.style.height = htmlCanvas.height.toString() + "px";
 var bw = window.innerWidth - 120;
 // Box height
 var bh = window.innerHeight - 120;
 // Padding
 var p = 10;
-maxwidth = (Math.floor(window.innerWidth / 40) - 2) * 40;
+maxwidth = (Math.floor(window.innerWidth / 40) - 3) * 40;
 maxheight = (Math.floor(window.innerHeight / 40) - 3) * 40;
-
+console.log(maxheight);
+console.log(bh);
 // Box width
 context.beginPath();
 
@@ -124,7 +125,7 @@ function start_block(xpos, ypos) {
     ypos = ypos - 28;
     var x = Math.floor(xpos / 40) * 40;
     var y = Math.floor(ypos / 40) * 40;
-    if (x < 0 || x > maxwidth || y < 0 || y > maxheight) {
+    if (x < 0 || x > bw || y < 0 || y > bh) {
         return;
     }
     if (startBox.xpos != -1 && startBox.ypos != -1) {
@@ -165,10 +166,10 @@ function end_block(xpos, ypos) {
     ypos = ypos - 28;
     var x = Math.floor(xpos / 40) * 40;
     var y = Math.floor(ypos / 40) * 40;
-    if (x < 0 || x > maxwidth || y < 0 || y > maxheight) {
+    if (x < 0 || x > bw || y < 0 || y > bh) {
         return;
     }
-    
+
     if (endBox.xpos != -1 && endBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
@@ -196,7 +197,7 @@ function landing_animation_end(img, xpos, ypos, size, count) {
         console.log("DDDDD");
         return;
     }
-    if(wall_marker == 1){
+    if (wall_marker == 1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(xpos - 5, ypos - 5, 40, 40);
         context.stroke();
@@ -307,7 +308,7 @@ function dijkstra_mode() {
 
 function bfs_mode() {
     algorithm = 3;
-    $("#dropdownMenuButton").text('BFS');
+    document.getElementById("navbarDropdown").innerText='BFS';
 }
 
 function start_algo() {
@@ -384,7 +385,7 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
     nodes.forEach(function (item) {
         console.log(item);
         console.log(visitednodes);
-        if (item[0] + 40 <= maxwidth && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
+        if (item[0] + 40 <= bw && !inset(visitednodes, item[0] + 40, item[1]) && !inset(wallSet, item[0] + 40, item[1])) {
             if ((item[0] + 40 == endBox.xpos) && (item[1] == endBox.ypos)) {
                 marker = 0;
                 cameFrom.push([item, [item[0] + 40, item[1]]]);
@@ -409,7 +410,7 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
             cameFrom.push([item, [item[0] - 40, item[1]]]);
             draw(item[0] - 40, item[1]);
         }
-        if (item[1] + 40 <= maxheight && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
+        if (item[1] + 40 <= bh - 40 && !inset(visitednodes, item[0], item[1] + 40) && !inset(wallSet, item[0], item[1] + 40)) {
             if ((item[0] == endBox.xpos) && (item[1] + 40 == endBox.ypos)) {
                 marker = 0;
                 cameFrom.push([item, [item[0], item[1] + 40]]);

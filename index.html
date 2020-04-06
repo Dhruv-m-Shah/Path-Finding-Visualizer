@@ -17,7 +17,7 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item active start">
-        <div onclick="start_state()">
+        <div onclick="start_state()"  type="button">
             <img class="start" src="imgs/flag.png">
             <p>Start Node</p>
         </div>
@@ -27,7 +27,7 @@
           aria-haspopup="true" aria-expanded="false">
           Pick Algorithm
         </a>
-        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown" id = "dropdown">
           <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
           <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
           <a class="dropdown-item" href="#" onclick="bfs_mode()">BFS</a>

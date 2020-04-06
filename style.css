@@ -1,12 +1,4 @@
 
-
-
-#dropdownMenuButton {
-    min-width: 150px;
-    top: 250px;
-
-}
-
 #c {
     position: relative;
     left: 20px;
@@ -24,11 +16,7 @@
     float: left;
     max-width: 40px;
     max-height: auto;
-}
-
-.nav-link.start {
-    font-size: 20px;
-    margin-left: 60px;
+    cursor: pointer;
 }
 
 .nav-link.dropdown-toggle.alog {
@@ -37,7 +25,6 @@
     margin-left: 184px;
     color: black;
 }
-
 
 .dropdown-menu.alog {
     margin-left: 184px;
@@ -55,6 +42,7 @@ canvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
   }
+
 .nav-item.active.start {
     transform: translateY(5px);
     white-space: nowrap;
@@ -104,6 +92,7 @@ canvas {
     margin-left: 150px;
     cursor: pointer;
 }
+
 .click{
     display: block;
     cursor: pointer;
