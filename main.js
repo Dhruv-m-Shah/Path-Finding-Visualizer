@@ -336,6 +336,8 @@ function draw(xpos, ypos) {
     context.stroke();
 }
 
+
+
 function draw_aqua(xpos, ypos, count) {
     if (count == 42) {
         return;
@@ -344,7 +346,7 @@ function draw_aqua(xpos, ypos, count) {
         return;
     }
     context.fillStyle = "#18859e";
-    context.fillRect(xpos, ypos, count, count);
+    context.fillRect(xpos + 20 - (count/2), ypos + 20 - (count/2), count, count);
     context.stroke();
     setTimeout(() => {
         draw_aqua(xpos, ypos, count+2);
