@@ -258,14 +258,23 @@ document.body.onmouseup = function () {
 var state_var = 0;
 
 function start_state() {
+    document.getElementById("startBut").style.fontWeight = "bold";
+    document.getElementById("endBut").style.fontWeight = "normal";
+    document.getElementById("wallBut").style.fontWeight = "normal";
     state_val = 1;
 }
 
 function end_state() {
+    document.getElementById("startBut").style.fontWeight = "normal";
+    document.getElementById("endBut").style.fontWeight = "bold";
+    document.getElementById("wallBut").style.fontWeight = "normal";
     state_val = 2;
 }
 
 function wall_state() {
+    document.getElementById("startBut").style.fontWeight = "normal";
+    document.getElementById("endBut").style.fontWeight = "normal";
+    document.getElementById("wallBut").style.fontWeight = "Bold";
     state_val = 3;
 }
 
