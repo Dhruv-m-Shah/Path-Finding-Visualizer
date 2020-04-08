@@ -63,13 +63,13 @@
 
 <body style="background: lightblue;">
 
-  <div class = "tutorial">
+  <div class = "tutorial" id = "tutorial">
     <h3 class="display-4">Welcome to Path Finding Visualizer!</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
     <img class = "algo-image" src ="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
   </div>
   <canvas class="drawingboard" id="c" style="background: #fff; margin:20px" width="200px" height="200px"></canvas>
 

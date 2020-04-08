@@ -459,7 +459,8 @@ function drawPath(cameFrom, curBox) {
             break;
         }
     }
+}
 
-
-
+function skipTutorial(){
+    document.getElementById("tutorial").style.display = "none";
 }
