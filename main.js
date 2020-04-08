@@ -17,6 +17,8 @@ wallSet = []; // Look for walls (Using array for now, problem with javascript SE
 algorithm = 0; // What algorithm to be used (1 -> A*,  2 -> dijkstra's, 3 -> BFS)
 wall_marker = 0;
 
+var pageNum = 0;
+
 var htmlCanvas = document.getElementById('c');
 var context = htmlCanvas.getContext("2d");
 htmlCanvas.width = (Math.floor(window.innerWidth / 40) - 2) * 40;
@@ -463,4 +465,12 @@ function drawPath(cameFrom, curBox) {
 
 function skipTutorial(){
     document.getElementById("tutorial").style.display = "none";
+}
+
+function nextPage(){
+    pageNum += 1;
+    if(pageNum == 10){
+        skipTutorial();
+    }
+    document.getElementById("pageNum").innerText = pageNum.toString() + "/9";
 }
