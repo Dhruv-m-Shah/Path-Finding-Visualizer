@@ -145,3 +145,9 @@
     max-width: 300px;
     max-height: auto;
 }
+
+.display-6.pageNum{
+    font-size: 20px;
+    position: absolute;
+    left: 10px;
+}
