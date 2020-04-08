@@ -109,3 +109,39 @@
     z-index: 10;
     border-radius: 10px;
 }
+.display-4{
+    padding-top: 10px;
+    text-align: center;
+}
+.display-6{
+    padding-top: 10px;
+    text-align: center;
+}
+.btn.btn-primary.btn-lg.next{
+    position: absolute;
+    left: 100%;
+    top:100%;
+    transform: translate(-90px, -55px);
+}
+
+.btn.btn-primary.btn-lg.prev{
+    position: absolute;
+    top:100%;
+    transform: translate(10px, -55px);
+}
+
+
+.btn.btn-primary.btn-lg.skip{
+    position: absolute;
+    top:100%;
+    left:50%;
+    transform: translate(-59px, -55px);
+}
+
+.algo-image{
+    position: absolute;
+    left: 370px;
+    bottom: 130px;
+    max-width: 300px;
+    max-height: auto;
+}
