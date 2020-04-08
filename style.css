@@ -1,7 +1,7 @@
 
 #c {
     position: relative;
-    left: 20px;
+    left: 15px;
     z-index: -2;
     image-rendering: pixelated;
 }
@@ -94,4 +94,18 @@
 
 .navbarText{
     font-size: 20px;
+}
+
+.animated.bounceIn.tutorial{
+    display: inline-block;
+    animation-duration: 1s;
+    position: absolute;
+    background-color: white;
+    border-style: solid;
+    left: 25vw;
+    top: 20vh;
+    width:1000px;
+    height: 600px;
+    z-index: 1000;
+    border-radius: 10px;
 }
