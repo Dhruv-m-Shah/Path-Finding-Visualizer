@@ -242,7 +242,7 @@ onmousemove = function (e) {
     if (state_val == 3 && mouseDown) {
         wall_block(event.pageX + 197, event.pageY - 88);
     } else {
-        lightUpSquare(event.pageX + 180, event.pageY - 94);
+        lightUpSquare(event.pageX + 185, event.pageY - 94);
     }
 
 }
