@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="imgs\favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="imgs\favicon.png" />
   <title>Path Finding Visualizer</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,9 +18,9 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item active start">
-        <div onclick="start_state()"  type="button">
-            <img class="start" src="imgs/flag.png">
-            <p id = "startBut" class = "navbarText">Start Node</p>
+        <div onclick="start_state()" type="button">
+          <img class="start" src="imgs/flag.png">
+          <p id="startBut" class="navbarText">Start Node</p>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -28,7 +28,7 @@
           aria-haspopup="true" aria-expanded="false">
           Pick Algorithm
         </a>
-        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown" id = "dropdown">
+        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown" id="dropdown">
           <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
           <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
           <a class="dropdown-item" href="#" onclick="bfs_mode()">BFS</a>
@@ -37,24 +37,24 @@
       <li class="nav-item active end">
         <div onclick="end_state()">
           <img class="end" src="imgs/End.png">
-          <p id = "endBut" class = "navbarText">End Node</p>
+          <p id="endBut" class="navbarText">End Node</p>
         </div>
       </li>
       <li class="nav-item active wall">
         <div onclick="wall_state()">
           <img class="brick" src="imgs/Brick.svg">
-          <p id = "wallBut" class = "navbarText">Draw Wall</p>
+          <p id="wallBut" class="navbarText">Draw Wall</p>
         </div>
       </li>
       <li class="nav-item active startalgo">
         <div onclick="start_algo()">
           <img class="brick" src="imgs/start.svg">
-          <p class = "navbarText">Start Path Finding</p>
+          <p class="navbarText">Start Path Finding</p>
         </div>
       </li>
       <li class="nav-item active startalgo">
         <div onclick="clear_slate()">
-          <p class = "navbarText">Clear Board</p>
+          <p class="navbarText">Clear Board</p>
         </div>
       </li>
     </ul>
@@ -64,86 +64,104 @@
 
 <body style="background: lightblue;">
   <!-- Beginning of tutorial slides -->
-  <div class = "tutorial1" id = "tutorial1">
-    <p class = "display-6 pageNum" id = "pageNum">1/9</p>
+  <div class="tutorial1" id="tutorial1">
+    <p class="display-6 pageNum" id="pageNum">1/9</p>
     <h3 class="display-4">Welcome to Path Finding Visualizer!</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
-    <button id = "prev" type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button id="prev" type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial2" id = "tutorial2">
-    <p class = "display-6 pageNum" id = "pageNum">2/9</p>
-    <h3 class="display-4">What are path finding algorithms?</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+  <div class="tutorial2" id="tutorial2">
+    <p class="display-6 pageNum" id="pageNum">2/9</p>
+    <h4 class="display-4">What are path finding algorithms?</h4>
+    <h5 class="display-6 instructions">Simply put, given a start and end location, a path finding algorithm can use a
+      sequence of
+      instructions to find a path from the start to the end based on some predefined criteria. Many of the concepts used
+      in these
+      algorithms are based from a branch of mathematics called <a target="_blank"
+        href="https://www.britannica.com/topic/graph-theory">graph theory</a>.
+    </h5>
+    <div class="row">
+      <div class="col">
+        <img class="bridge-image" src="imgs/Bridges.jpg">
+      </div>
+      <div class="col">
+        <div class="text ml-5">
+          <h5 class="display-6 bridge">The bridge traversal problem is a age-old graph theory question. Can you find a path that traverses all seven bridges, given that you can travel across each bridge only once?
+            Find the answer <a target="_blank" href = "https://www.youtube.com/watch?v=nZwSo4vfw6c">here</a>.
+          </h5>
+        </div>
+      </div>
+
+    </div>
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial3" id = "tutorial3">
-    <p class = "display-6 pageNum" id = "pageNum">3/9</p>
+  <div class="tutorial3" id="tutorial3">
+    <p class="display-6 pageNum" id="pageNum">3/9</p>
     <h3 class="display-4">Types of Path Finding Algorithm</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial4" id = "tutorial4">
-    <p class = "display-6 pageNum" id = "pageNum">4/9</p>
+  <div class="tutorial4" id="tutorial4">
+    <p class="display-6 pageNum" id="pageNum">4/9</p>
     <h3 class="display-4">Get started by picking a start node</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial5" id = "tutorial5">
-    <p class = "display-6 pageNum" id = "pageNum">5/9</p>
+  <div class="tutorial5" id="tutorial5">
+    <p class="display-6 pageNum" id="pageNum">5/9</p>
     <h3 class="display-4">Now pick a location for your end node</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial6" id = "tutorial6">
-    <p class = "display-6 pageNum" id = "pageNum">6/9</p>
+  <div class="tutorial6" id="tutorial6">
+    <p class="display-6 pageNum" id="pageNum">6/9</p>
     <h3 class="display-4">Draw obstacles/walls</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial7" id = "tutorial7">
-    <p class = "display-6 pageNum" id = "pageNum">7/9</p>
+  <div class="tutorial7" id="tutorial7">
+    <p class="display-6 pageNum" id="pageNum">7/9</p>
     <h3 class="display-4">Pick your desired algorithm</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial8" id = "tutorial8">
-    <p class = "display-6 pageNum" id = "pageNum">8/9</p>
+  <div class="tutorial8" id="tutorial8">
+    <p class="display-6 pageNum" id="pageNum">8/9</p>
     <h3 class="display-4">Hit Run!</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class = "tutorial9" id = "tutorial9">
-    <p class = "display-6 pageNum" id = "pageNum">9/9</p>
+  <div class="tutorial9" id="tutorial9">
+    <p class="display-6 pageNum" id="pageNum">9/9</p>
     <h3 class="display-4">Enjoy the animation</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class = "algo-image" src ="imgs/algorithm.svg">
+    <img class="algo-image" src="imgs/algorithm.svg">
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick = "skipTutorial()">Skip Tutorial</button>
+    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
   <!-- End of tutorial slides -->
   <canvas class="drawingboard" id="c" style="background: #fff; margin:20px" width="200px" height="200px"></canvas>
@@ -158,6 +176,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
+
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
   </head>

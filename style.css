@@ -263,3 +263,27 @@
     position: absolute;
     left: 10px;
 }
+.display-6.instructions{
+    line-height: 1.8;
+    font-weight: normal;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.bridge-image{
+    display: block;
+    position: absolute;
+    max-width: 550px;
+    max-height: auto;
+}
+.display-6.bridge{
+    line-height: 1.8;
+    font-weight: normal;
+    max-width: 400px;
+}
+.text{
+    
+    margin-right: 10px;
+    transform: translate(30px, 20px);
+}
+
