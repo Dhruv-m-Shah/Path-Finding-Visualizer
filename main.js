@@ -17,7 +17,7 @@ wallSet = []; // Look for walls (Using array for now, problem with javascript SE
 algorithm = 0; // What algorithm to be used (1 -> A*,  2 -> dijkstra's, 3 -> BFS)
 wall_marker = 0;
 
-var pageNum = 0;
+var pageNum = 1;
 
 var htmlCanvas = document.getElementById('c');
 var context = htmlCanvas.getContext("2d");
@@ -464,13 +464,33 @@ function drawPath(cameFrom, curBox) {
 }
 
 function skipTutorial(){
-    document.getElementById("tutorial").style.display = "none";
+    currentSlide  = "tutorial" + pageNum.toString();
+    document.getElementById(currentSlide).style.display = "none";
 }
 
 function nextPage(){
+    currentSlide  = "tutorial" + pageNum.toString();
+    document.getElementById(currentSlide).style.display = "none";
     pageNum += 1;
+    currentSlide  = "tutorial" + pageNum.toString();
+    document.getElementById(currentSlide).style.display = "block";
     if(pageNum == 10){
         skipTutorial();
     }
-    document.getElementById("pageNum").innerText = pageNum.toString() + "/9";
+}
+
+function prevPage(){
+    if(pageNum == 1){
+        document.getElementById("prev").disabled = true;
+        return;
+    }
+    currentSlide  = "tutorial" + pageNum.toString();
+    document.getElementById(currentSlide).style.display = "none";
+    pageNum -= 1;
+    currentSlide  = "tutorial" + pageNum.toString();
+    document.getElementById(currentSlide).style.display = "block";
+    if(pageNum == 10){
+        skipTutorial();
+    }
+
 }

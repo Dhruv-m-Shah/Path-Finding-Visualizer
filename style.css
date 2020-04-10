@@ -96,7 +96,119 @@
     font-size: 20px;
 }
 
-.tutorial{
+.tutorial1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial2{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial3{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial4{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial5{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial6{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial7{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial8{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -500px;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    border-style: solid;
+    z-index: 10;
+    border-radius: 10px;
+}
+.tutorial9{
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
