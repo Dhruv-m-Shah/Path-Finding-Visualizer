@@ -311,3 +311,15 @@
     max-width: 400px;
     transform: translate(550px, 157px);
 }
+
+.arrow{
+    display: none;
+    position: absolute;
+    max-width: 100px;
+    transform:  translate(440px, -10px);
+}
+
+.animated.infinite.bounce.pointer-arrow{
+    position: absolute;
+    max-width: 100px;
+}

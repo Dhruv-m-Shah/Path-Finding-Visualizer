@@ -474,6 +474,12 @@ function nextPage(){
     pageNum += 1;
     currentSlide  = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "block";
+    if(pageNum == 4){
+        document.getElementById("arrow").style.display = "block";
+    }
+    else{
+        document.getElementById("arrow").style.display = "none";
+    }
     if(pageNum == 10){
         skipTutorial();
     }
@@ -489,6 +495,12 @@ function prevPage(){
     pageNum -= 1;
     currentSlide  = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "block";
+    if(pageNum == 4){
+        document.getElementById("arrow").style.display = "block";
+    }
+    else{
+        document.getElementById("arrow").style.display = "none";
+    }
     if(pageNum == 9){
         skipTutorial();
     }
