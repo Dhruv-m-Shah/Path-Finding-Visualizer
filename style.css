@@ -286,4 +286,28 @@
     margin-right: 10px;
     transform: translate(30px, 20px);
 }
+.weighted-graph{
+    float: left;
+    transform: translate(40px, -30px);
+    position: absolute;
+    max-width: 300px;
+}
+.unweighted-graph{
+    float: right;
+    transform: translate(550px, -70px);
+    position: absolute;
+    max-width: 500px;
+}
+.display-7.weighted{
+    font-size: 15px;
+    font-weight: normal;
+    max-width: 400px;
+    transform: translate(20px, 200px);
+}
 
+.display-7.unweighted{
+    font-size: 15px;
+    font-weight: normal;
+    max-width: 400px;
+    transform: translate(550px, 157px);
+}

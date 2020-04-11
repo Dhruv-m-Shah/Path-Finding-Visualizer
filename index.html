@@ -106,11 +106,14 @@
     <p class="display-6 pageNum" id="pageNum">3/9</p>
     <h3 class="display-4">Types of path finding algorithms</h3>
     <h5 class="display-6 instructions"> Different algorithms are employed based on the complexity of the path finding
-      problem. For example, Google Maps employs a modified version of Dijkstra's or A* algorithm as those algorithms
+      problem. For example, Google Maps employs a modified version of Dijkstra's or A* algorithm which
       take into account path costs. As in the figure shown below, going through certain paths have a greater cost, and
-      the goal of the algorithm is to get to the desired destination with minimal cost. In the context of Google Maps,
-      those costs are time. When there are no path costs or weights, simpler algorithms such as DFS or BFS are used.
+      the goal of the algorithm is to get to the desired destination with minimal cost. When there are no path costs or weights, simpler algorithms such as DFS or BFS are used.
     </h5>
+    <img class="weighted-graph" src="imgs/Wieghted-graph.png">
+    <h5 class="display-7 weighted">The above image shows a weighted graph, Dijkstra's and A* are used for finding shortest path</h5>
+    <img class="unweighted-graph" src="imgs/Unwieghted-graph.png">
+    <h5 class="display-7 unweighted">The above image shows an unweighted graph, BFS or DFS are used for finding shortest path</h5>
 
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
