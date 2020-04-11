@@ -489,7 +489,7 @@ function prevPage(){
     pageNum -= 1;
     currentSlide  = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "block";
-    if(pageNum == 10){
+    if(pageNum == 9){
         skipTutorial();
     }
 
