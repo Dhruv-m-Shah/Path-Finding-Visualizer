@@ -89,8 +89,10 @@
       </div>
       <div class="col">
         <div class="text ml-5">
-          <h5 class="display-6 bridge">The bridge traversal problem is an age-old graph theory question. Can you find a path that traverses all seven bridges, given that you can travel across each bridge only once?
-            Find the answer <a target="_blank" href = "https://www.youtube.com/watch?v=nZwSo4vfw6c">here</a>.
+          <h5 class="display-6 bridge">The bridge traversal problem is an age-old graph theory question. Can you find a
+            path that traverses all seven bridges, given that you can travel across each bridge only once? (And can't
+            walk through water).
+            Find the answer <a target="_blank" href="https://www.youtube.com/watch?v=nZwSo4vfw6c">here</a>.
           </h5>
         </div>
       </div>
@@ -102,9 +104,14 @@
   </div>
   <div class="tutorial3" id="tutorial3">
     <p class="display-6 pageNum" id="pageNum">3/9</p>
-    <h3 class="display-4">Types of Path Finding Algorithm</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class="algo-image" src="imgs/algorithm.svg">
+    <h3 class="display-4">Types of path finding algorithms</h3>
+    <h5 class="display-6 instructions"> Different algorithms are employed based on the complexity of the path finding
+      problem. For example, Google Maps employs a modified version of Dijkstra's or A* algorithm as those algorithms
+      take into account path costs. As in the figure shown below, going through certain paths have a greater cost, and
+      the goal of the algorithm is to get to the desired destination with minimal cost. In the context of Google Maps,
+      those costs are time. When there are no path costs or weights, simpler algorithms such as DFS or BFS are used.
+    </h5>
+
     <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
     <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
