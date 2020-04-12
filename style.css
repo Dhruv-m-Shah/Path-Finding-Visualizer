@@ -194,6 +194,15 @@
     z-index: 10;
 }
 
+.tutorial10 {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.329);
+    z-index: 10;
+}
+
 .display-4 {
     z-index: 11;
     padding-top: 10px;

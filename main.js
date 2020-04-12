@@ -286,7 +286,6 @@ function wall_state() {
     document.getElementById("endBut").style.fontWeight = "normal";
     document.getElementById("wallBut").style.fontWeight = "Bold";
     document.getElementById("arrowWall").style.display = "none";
-    if (pageNum == 8) nextPage();
     state_val = 3;
 }
 
@@ -317,23 +316,27 @@ function aStar_mode() {
     $("#dropdownMenuButton").text('A*');
     document.getElementById("navbarDropdown").innerText = 'A*';
     document.getElementById("arrowAlgo").style.display = "none";
+    if(pageNum == 9) nextPage();
 }
 
 function dijkstra_mode() {
     algorithm = 2;
     document.getElementById("navbarDropdown").innerText = 'Dijkstra';
     document.getElementById("arrowAlgo").style.display = "none";
+    if(pageNum == 9) nextPage();
 }
 
 function bfs_mode() {
     algorithm = 3;
     document.getElementById("navbarDropdown").innerText = 'BFS';
     document.getElementById("arrowAlgo").style.display = "none";
+    if(pageNum == 9) nextPage();
 }
 
 function start_algo() {
     document.getElementById("arrowStart").style.display = "none";
-
+    if(pageNum == 10) skipTutorial();
+    document.getElementById("")
     if (algorithm == 1) {
         A();
     }
@@ -487,7 +490,7 @@ function nextPage() {
     currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "none";
     pageNum += 1;
-    if (pageNum < 9) {
+    if (pageNum < 11) {
         currentSlide = "tutorial" + pageNum.toString();
         document.getElementById(currentSlide).style.display = "block";
     }
@@ -511,7 +514,7 @@ function nextPage() {
     } else {
         document.getElementById("arrowAlgo").style.display = "none";
     }
-    if (pageNum == 12) {
+    if (pageNum == 10) {
         document.getElementById("arrowStart").style.display = "block";
     } else {
         document.getElementById("arrowStart").style.display = "none";
@@ -519,9 +522,9 @@ function nextPage() {
     if (pageNum == 8) {
         setTimeout(() => {
             nextPage();
-        }, 10000)
+        }, 7000)
     }
-    if (pageNum == 10) {
+    if (pageNum == 11) {
         skipTutorial();
     }
 
