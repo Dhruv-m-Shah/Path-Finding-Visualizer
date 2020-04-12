@@ -263,6 +263,7 @@ function start_state() {
     document.getElementById("startBut").style.fontWeight = "bold";
     document.getElementById("endBut").style.fontWeight = "normal";
     document.getElementById("wallBut").style.fontWeight = "normal";
+    document.getElementById("arrow").style.display = "none";
     state_val = 1;
 }
 
@@ -270,6 +271,7 @@ function end_state() {
     document.getElementById("startBut").style.fontWeight = "normal";
     document.getElementById("endBut").style.fontWeight = "bold";
     document.getElementById("wallBut").style.fontWeight = "normal";
+    document.getElementById("arrowEnd").style.display = "none";
     state_val = 2;
 }
 
@@ -277,6 +279,7 @@ function wall_state() {
     document.getElementById("startBut").style.fontWeight = "normal";
     document.getElementById("endBut").style.fontWeight = "normal";
     document.getElementById("wallBut").style.fontWeight = "Bold";
+    document.getElementById("arrowWall").style.display = "none";
     state_val = 3;
 }
 
@@ -306,20 +309,25 @@ function aStar_mode() {
     algorithm = 1;
     $("#dropdownMenuButton").text('A*');
     document.getElementById("navbarDropdown").innerText = 'A*';
+    document.getElementById("arrowAlgo").style.display = "none";
 }
 
 function dijkstra_mode() {
-
     algorithm = 2;
     document.getElementById("navbarDropdown").innerText = 'Dijkstra';
+    document.getElementById("arrowAlgo").style.display = "none";
 }
 
 function bfs_mode() {
     algorithm = 3;
     document.getElementById("navbarDropdown").innerText = 'BFS';
+    document.getElementById("arrowAlgo").style.display = "none";
+
 }
 
 function start_algo() {
+    document.getElementById("arrowStart").style.display = "none";
+
     if (algorithm == 1) {
         A();
     }
@@ -357,10 +365,10 @@ function draw_aqua(xpos, ypos, count) {
         return;
     }
     context.fillStyle = "#18859e";
-    context.fillRect(xpos + 20 - (count/2), ypos + 20 - (count/2), count, count);
+    context.fillRect(xpos + 20 - (count / 2), ypos + 20 - (count / 2), count, count);
     context.stroke();
     setTimeout(() => {
-        draw_aqua(xpos, ypos, count+2);
+        draw_aqua(xpos, ypos, count + 2);
     }, 5)
 }
 
@@ -463,45 +471,88 @@ function drawPath(cameFrom, curBox) {
     }
 }
 
-function skipTutorial(){
-    currentSlide  = "tutorial" + pageNum.toString();
+function skipTutorial() {
+    currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "none";
 }
 
-function nextPage(){
-    currentSlide  = "tutorial" + pageNum.toString();
+function nextPage() {
+    currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "none";
     pageNum += 1;
-    currentSlide  = "tutorial" + pageNum.toString();
-    document.getElementById(currentSlide).style.display = "block";
-    if(pageNum == 4){
-        document.getElementById("arrow").style.display = "block";
+    if (pageNum < 9) {
+        currentSlide = "tutorial" + pageNum.toString();
+        document.getElementById(currentSlide).style.display = "block";
     }
-    else{
+    if (pageNum == 4) {
+        document.getElementById("arrow").style.display = "block";
+    } else {
         document.getElementById("arrow").style.display = "none";
     }
-    if(pageNum == 10){
+    if (pageNum == 5) {
+        document.getElementById("arrowEnd").style.display = "block";
+    } else {
+        document.getElementById("arrowEnd").style.display = "none";
+    }
+    if (pageNum == 6) {
+        document.getElementById("arrowWall").style.display = "block";
+    } else {
+        document.getElementById("arrowWall").style.display = "none";
+    }
+    if (pageNum == 7) {
+        document.getElementById("arrowAlgo").style.display = "block";
+    } else {
+        document.getElementById("arrowAlgo").style.display = "none";
+    }
+    if (pageNum == 8) {
+        document.getElementById("arrowStart").style.display = "block";
+    } else {
+        document.getElementById("arrowStart").style.display = "none";
+    }
+    if (pageNum == 10) {
         skipTutorial();
     }
 }
 
-function prevPage(){
-    if(pageNum == 1){
+function prevPage() {
+    if (pageNum == 1) {
         document.getElementById("prev").disabled = true;
         return;
     }
-    currentSlide  = "tutorial" + pageNum.toString();
+
+    currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "none";
     pageNum -= 1;
-    currentSlide  = "tutorial" + pageNum.toString();
+    currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "block";
-    if(pageNum == 4){
+
+    if (pageNum == 4) {
         document.getElementById("arrow").style.display = "block";
-    }
-    else{
+    } else {
         document.getElementById("arrow").style.display = "none";
     }
-    if(pageNum == 9){
+    if (pageNum == 5) {
+        document.getElementById("arrowEnd").style.display = "block";
+    } else {
+        document.getElementById("arrowEnd").style.display = "none";
+    }
+    if (pageNum == 6) {
+        document.getElementById("arrowWall").style.display = "block";
+    } else {
+        document.getElementById("arrowWall").style.display = "none";
+    }
+    if (pageNum == 7) {
+        document.getElementById("arrowAlgo").style.display = "block";
+    } else {
+        document.getElementById("arrowAlgo").style.display = "none";
+    }
+    if (pageNum == 8) {
+        document.getElementById("arrowStart").style.display = "block";
+    } else {
+        document.getElementById("arrowStart").style.display = "none";
+    }
+
+    if (pageNum == 9) {
         skipTutorial();
     }
 

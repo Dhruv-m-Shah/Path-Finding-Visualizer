@@ -21,6 +21,7 @@
 }
 
 .nav-link.dropdown-toggle.alog {
+    min-width: 170px;
     transform: translateY(-3px);
     margin-left: 184px;
     color: black;
@@ -320,6 +321,50 @@
 }
 
 .animated.infinite.bounce.pointer-arrow{
+    position: absolute;
+    max-width: 100px;
+}
+
+.arrowEnd{
+    display: none;
+    position: absolute;
+    max-width: 100px;
+    transform:  translate(920px, -10px);
+}
+.animated.infinite.bounce.pointer-arrow-end{
+    position: absolute;
+    max-width: 100px;
+}
+
+.arrowWall{
+    display: none;
+    position: absolute;
+    max-width: 100px;
+    transform:  translate(1120px, -10px);
+}
+.animated.infinite.bounce.pointer-arrow-wall{
+    position: absolute;
+    max-width: 100px;
+}
+
+.arrowAlgo{
+    display: none;
+    position: absolute;
+    max-width: 100px;
+    transform:  translate(660px, -10px);
+}
+.animated.infinite.bounce.pointer-arrow-algo{
+    position: absolute;
+    max-width: 100px;
+}
+
+.arrowStart{
+    display: none;
+    position: absolute;
+    max-width: 100px;
+    transform:  translate(1368px, -10px);
+}
+.animated.infinite.bounce.pointer-arrow-start{
     position: absolute;
     max-width: 100px;
 }
