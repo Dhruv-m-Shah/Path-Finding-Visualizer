@@ -256,9 +256,7 @@ document.body.onmouseup = function () {
     mouseDown = 0;
 }
 
-
-var state_var = 0;
-
+var disable = 0;
 function start_state() {
     document.getElementById("startBut").style.fontWeight = "bold";
     document.getElementById("endBut").style.fontWeight = "normal";
@@ -322,7 +320,6 @@ function bfs_mode() {
     algorithm = 3;
     document.getElementById("navbarDropdown").innerText = 'BFS';
     document.getElementById("arrowAlgo").style.display = "none";
-
 }
 
 function start_algo() {

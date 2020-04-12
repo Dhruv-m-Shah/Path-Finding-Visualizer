@@ -141,16 +141,10 @@
 .tutorial4{
     display: none;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -300px;
-    margin-left: -500px;
-    width: 1000px;
-    height: 600px;
-    background-color: white;
-    border-style: solid;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.329);
     z-index: 10;
-    border-radius: 10px;
 }
 .tutorial5{
     display: none;
@@ -223,8 +217,15 @@
     border-radius: 10px;
 }
 .display-4{
+    z-index: 11;
     padding-top: 10px;
     text-align: center;
+}
+.display-4.overlay{
+    z-index: 11;
+    padding-top: 10px;
+    text-align: center;
+    color: white;
 }
 .display-6{
     padding-top: 10px;
@@ -314,6 +315,7 @@
 }
 
 .arrow{
+    z-index: 11;
     display: none;
     position: absolute;
     max-width: 100px;
@@ -321,50 +323,59 @@
 }
 
 .animated.infinite.bounce.pointer-arrow{
+    z-index: 11;
     position: absolute;
     max-width: 100px;
 }
 
 .arrowEnd{
+    z-index: 11;
     display: none;
     position: absolute;
     max-width: 100px;
     transform:  translate(920px, -10px);
 }
 .animated.infinite.bounce.pointer-arrow-end{
+    z-index: 11;
     position: absolute;
     max-width: 100px;
 }
 
 .arrowWall{
+    z-index: 11;
     display: none;
     position: absolute;
     max-width: 100px;
     transform:  translate(1120px, -10px);
 }
 .animated.infinite.bounce.pointer-arrow-wall{
+    z-index: 11;
     position: absolute;
     max-width: 100px;
 }
 
 .arrowAlgo{
+    z-index: 11;
     display: none;
     position: absolute;
     max-width: 100px;
     transform:  translate(660px, -10px);
 }
 .animated.infinite.bounce.pointer-arrow-algo{
+    z-index: 11;
     position: absolute;
     max-width: 100px;
 }
 
 .arrowStart{
+    z-index: 11;
     display: none;
     position: absolute;
     max-width: 100px;
     transform:  translate(1368px, -10px);
 }
 .animated.infinite.bounce.pointer-arrow-start{
+    z-index: 11;
     position: absolute;
     max-width: 100px;
 }
