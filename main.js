@@ -127,6 +127,9 @@ function start_block(xpos, ypos) {
     if (x < 0 || x > bw || y < 0 || y > bh) {
         return;
     }
+    if (pageNum <= 8) {
+        nextPage();
+    }
     if (startBox.xpos != -1 && startBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(startBox.xpos, startBox.ypos, 40, 40);
@@ -169,7 +172,9 @@ function end_block(xpos, ypos) {
     if (x < 0 || x > bw || y < 0 || y > bh) {
         return;
     }
-
+    if (pageNum == 7) {
+        nextPage();
+    }
     if (endBox.xpos != -1 && endBox.ypos != -1) {
         context.fillStyle = "#FFFFFF";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
@@ -256,12 +261,14 @@ document.body.onmouseup = function () {
     mouseDown = 0;
 }
 
-var disable = 0;
+
 function start_state() {
     document.getElementById("startBut").style.fontWeight = "bold";
     document.getElementById("endBut").style.fontWeight = "normal";
     document.getElementById("wallBut").style.fontWeight = "normal";
     document.getElementById("arrow").style.display = "none";
+    if (pageNum == 4) nextPage();
+
     state_val = 1;
 }
 
@@ -270,6 +277,7 @@ function end_state() {
     document.getElementById("endBut").style.fontWeight = "bold";
     document.getElementById("wallBut").style.fontWeight = "normal";
     document.getElementById("arrowEnd").style.display = "none";
+    if (pageNum == 6) nextPage();
     state_val = 2;
 }
 
@@ -278,6 +286,7 @@ function wall_state() {
     document.getElementById("endBut").style.fontWeight = "normal";
     document.getElementById("wallBut").style.fontWeight = "Bold";
     document.getElementById("arrowWall").style.display = "none";
+    if (pageNum == 8) nextPage();
     state_val = 3;
 }
 
@@ -471,6 +480,7 @@ function drawPath(cameFrom, curBox) {
 function skipTutorial() {
     currentSlide = "tutorial" + pageNum.toString();
     document.getElementById(currentSlide).style.display = "none";
+    pageNum = 20;
 }
 
 function nextPage() {
@@ -486,29 +496,35 @@ function nextPage() {
     } else {
         document.getElementById("arrow").style.display = "none";
     }
-    if (pageNum == 5) {
+    if (pageNum == 6) {
         document.getElementById("arrowEnd").style.display = "block";
     } else {
         document.getElementById("arrowEnd").style.display = "none";
     }
-    if (pageNum == 6) {
+    if (pageNum == 8) {
         document.getElementById("arrowWall").style.display = "block";
     } else {
         document.getElementById("arrowWall").style.display = "none";
     }
-    if (pageNum == 7) {
+    if (pageNum == 9) {
         document.getElementById("arrowAlgo").style.display = "block";
     } else {
         document.getElementById("arrowAlgo").style.display = "none";
     }
-    if (pageNum == 8) {
+    if (pageNum == 12) {
         document.getElementById("arrowStart").style.display = "block";
     } else {
         document.getElementById("arrowStart").style.display = "none";
     }
+    if (pageNum == 8) {
+        setTimeout(() => {
+            nextPage();
+        }, 10000)
+    }
     if (pageNum == 10) {
         skipTutorial();
     }
+
 }
 
 function prevPage() {

@@ -64,22 +64,22 @@
 
 <body style="background: lightblue;">
   <!-- Beginning of tutorial slides -->
-  <div class = "arrow" id = "arrow">
+  <div class="arrow" id="arrow">
     <img class="animated infinite bounce pointer-arrow" src="imgs/up-arrow.svg">
   </div>
-  <div class = "arrowEnd" id = "arrowEnd">
+  <div class="arrowEnd" id="arrowEnd">
     <img class="animated infinite bounce pointer-arrow-end" src="imgs/up-arrow.svg">
   </div>
-  <div class = "arrowWall" id = "arrowWall">
+  <div class="arrowWall" id="arrowWall">
     <img class="animated infinite bounce pointer-arrow-wall" src="imgs/up-arrow.svg">
   </div>
-  <div class = "arrowAlgo" id = "arrowAlgo">
+  <div class="arrowAlgo" id="arrowAlgo">
     <img class="animated infinite bounce pointer-arrow-algo" src="imgs/up-arrow.svg">
   </div>
-  <div class = "arrowStart" id = "arrowStart">
+  <div class="arrowStart" id="arrowStart">
     <img class="animated infinite bounce pointer-arrow-" src="imgs/up-arrow.svg">
   </div>
-  <div class="tutorial1" id="tutorial1" onclick="disable_click()">
+  <div class="tutorial1" id="tutorial1">
     <p class="display-6 pageNum" id="pageNum">1/8</p>
     <h3 class="display-4">Welcome to Path Finding Visualizer!</h3>
     <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
@@ -88,7 +88,7 @@
     <button id="prev" type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
     <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class="tutorial2" id="tutorial2" onclick="disable_click()">
+  <div class="tutorial2" id="tutorial2">
     <p class="display-6 pageNum" id="pageNum">2/8</p>
     <h4 class="display-4">What are path finding algorithms?</h4>
     <h5 class="display-6 instructions">Simply put, given a start and end location, a path finding algorithm can use a
@@ -117,7 +117,7 @@
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
     <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class="tutorial3" id="tutorial3" onclick="disable_click()">
+  <div class="tutorial3" id="tutorial3">
     <p class="display-6 pageNum" id="pageNum">3/8</p>
     <h3 class="display-4">Types of path finding algorithms</h3>
     <h5 class="display-6 instructions"> Different algorithms are employed based on the complexity of the path finding
@@ -137,44 +137,24 @@
     <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
     <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
   </div>
-  <div class="tutorial4" id="tutorial4" onclick="disable_click()">
+  <div class="tutorial4" id="tutorial4">
     <h3 class="display-4 overlay">Get started by picking a start node</h3>
   </div>
-  <div class="tutorial5" id="tutorial5" onclick="disable_click()">
-    <p class="display-6 pageNum" id="pageNum">5/8</p>
-    <h3 class="display-4">Now pick a location for your end node</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class="algo-image" src="imgs/algorithm.svg">
-    <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
-    <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
+  <div class="tutorial5" id="tutorial5">
+    <h3 class="display-4 overlay">Now click anywhere on the grid</h3>
   </div>
-  <div class="tutorial6" id="tutorial6" onclick="disable_click()">
-    <p class="display-6 pageNum" id="pageNum">6/8</p>
-    <h3 class="display-4">Draw obstacles/walls</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class="algo-image" src="imgs/algorithm.svg">
-    <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
-    <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
+
+  <div class="tutorial6" id="tutorial6">
+    <h3 class="display-4 overlayend">Now select end node</h3>
   </div>
-  <div class="tutorial7" id="tutorial7" onclick="disable_click()">
-    <p class="display-6 pageNum" id="pageNum">7/8</p>
-    <h3 class="display-4">Pick your desired algorithm</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class="algo-image" src="imgs/algorithm.svg">
-    <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
-    <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
+  <div class="tutorial7" id="tutorial7">
+    <h3 class="display-4 overlay">Now click anywhere on the grid</h3>
   </div>
-  <div class="tutorial8" id="tutorial8" onclick="disable_click()">
-    <p class="display-6 pageNum" id="pageNum">8/8</p>
-    <h3 class="display-4">Hit Run!</h3>
-    <h4 class="display-6">This tutorial will walk you through features of this web app</h4>
-    <img class="algo-image" src="imgs/algorithm.svg">
-    <button type="button" class="btn btn-primary btn-lg next" onclick="nextPage()">Next</button>
-    <button type="button" class="btn btn-primary btn-lg prev" onclick="prevPage()">Previous</button>
-    <button type="button" class="btn btn-primary btn-lg skip" onclick="skipTutorial()">Skip Tutorial</button>
+  <div class="tutorial8" id="tutorial8">
+    <h3 class="display-4 overlay">Draw Walls</h3>
+  </div>
+  <div class="tutorial9" id="tutorial8">
+    <h3 class="display-4 overlay">Now pick an algorithm</h3>
   </div>
   <!-- End of tutorial slides -->
   <canvas class="drawingboard" id="c" style="background: #fff; margin:20px" width="200px" height="200px"></canvas>
