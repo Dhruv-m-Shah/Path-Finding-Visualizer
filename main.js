@@ -57,7 +57,21 @@ function drawBoard() {
     }
     context.stroke();
 }
+var weights = new Array(Math.floor(bw / 40) + 1);
+function new_array() {
+    for (var i = 0; i < weights.length; i++) {
+        weights[i] = new Array(Math.floor(bh / 40) + 1);
+    }
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            weights[j][i] = 0;
+        }
+    }
+
+}
+
 drawBoard();
+new_array();
 
 function inset(array, x, y) {
     for (var i = 0; i < array.length; i++) {
@@ -73,6 +87,9 @@ function lightUpSquare(xpos, ypos) {
     ypos = ypos - 20;
     var x = Math.floor(xpos / 40) * 40;
     var y = Math.floor(ypos / 40) * 40;
+        if (x < 0 || x > bw || y < 0 || y > bh) {
+        return;
+    }
     temp = {
         x,
         y
@@ -104,18 +121,29 @@ function lightUpSquare(xpos, ypos) {
             inset(visitednodes, previousGrid.xpos, previousGrid.ypos)) {
             context.fillStyle = "#32d6db";
             context.fillRect(x, y, 40, 40);
+            if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0) {
+                context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
+            }
             context.stroke();
             previousGrid.xpos = x;
             previousGrid.ypos = y;
+
             return;
         }
         context.fillStyle = "#FFFFFF"
         context.fillRect(previousGrid.xpos, previousGrid.ypos, 40, 40);
         context.fillStyle = "#32d6db";
         context.fillRect(x, y, 40, 40);
+        if (weights[Math.floor(previousGrid.xpos / 40)][Math.floor(previousGrid.ypos / 40)] != 0) {
+            context.fillText(weights[Math.floor(previousGrid.xpos / 40)][Math.floor(previousGrid.ypos / 40)], previousGrid.xpos + 10, previousGrid.ypos + 30);
+        }
+        if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0) {
+            context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
+        }
         context.stroke();
         previousGrid.xpos = x;
         previousGrid.ypos = y;
+
     }
 }
 
@@ -228,6 +256,29 @@ function wall_block(xpos, ypos) {
     context.stroke();
 }
 
+function weight(xpos, ypos) {
+    xpos = xpos - 28 - 200;
+    ypos = ypos - 28;
+    var x = Math.floor(xpos / 40) * 40;
+    var y = Math.floor(ypos / 40) * 40;
+    if (x < 0 || x > bw || y < 0 || y > bh) {
+        return;
+    }
+    if (inset(wallSet, x, y)) {
+        return;
+    }
+    if (weights[Math.floor(x / 40)][Math.floor(y / 40)] == 20) return;
+    context.font = "30px Arial";
+    console.log(weights);
+    context.fillStyle = "#FFFFFF";
+    context.fillRect(x, y, 40, 40);
+    context.stroke();
+
+    context.fillStyle = "#a1e7f7";
+    weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
+    context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
+
+}
 
 
 
@@ -240,6 +291,10 @@ document.onclick = function (event) {
     if (state_val == 2) {
         wall_marker = 1;
         end_block(event.pageX + 197, event.pageY - 88);
+    }
+
+    if (state_val == 4) {
+        weight(event.pageX + 197, event.pageY - 88);
     }
 
 };
@@ -289,6 +344,10 @@ function wall_state() {
     state_val = 3;
 }
 
+function add_weight() {
+    state_val = 4;
+}
+
 function clear_slate() {
     state_val = 0;
     wallSet = [];
@@ -316,26 +375,26 @@ function aStar_mode() {
     $("#dropdownMenuButton").text('A*');
     document.getElementById("navbarDropdown").innerText = 'A*';
     document.getElementById("arrowAlgo").style.display = "none";
-    if(pageNum == 9) nextPage();
+    if (pageNum == 9) nextPage();
 }
 
 function dijkstra_mode() {
     algorithm = 2;
     document.getElementById("navbarDropdown").innerText = 'Dijkstra';
     document.getElementById("arrowAlgo").style.display = "none";
-    if(pageNum == 9) nextPage();
+    if (pageNum == 9) nextPage();
 }
 
 function bfs_mode() {
     algorithm = 3;
     document.getElementById("navbarDropdown").innerText = 'BFS';
     document.getElementById("arrowAlgo").style.display = "none";
-    if(pageNum == 9) nextPage();
+    if (pageNum == 9) nextPage();
 }
 
 function start_algo() {
     document.getElementById("arrowStart").style.display = "none";
-    if(pageNum == 10) skipTutorial();
+    if (pageNum == 10) skipTutorial();
     document.getElementById("")
     if (algorithm == 1) {
         A();
@@ -468,6 +527,11 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
 
 }
 
+
+function dijkstras() {
+
+}
+
 function drawPath(cameFrom, curBox) {
     for (let i = 0; i < cameFrom.length; i++) {
         if (curBox[0] == cameFrom[i][1][0] && curBox[1] == cameFrom[i][1][1]) {
@@ -547,28 +611,32 @@ function prevPage() {
     } else {
         document.getElementById("arrow").style.display = "none";
     }
-    if (pageNum == 5) {
+    if (pageNum == 6) {
         document.getElementById("arrowEnd").style.display = "block";
     } else {
         document.getElementById("arrowEnd").style.display = "none";
     }
-    if (pageNum == 6) {
+    if (pageNum == 8) {
         document.getElementById("arrowWall").style.display = "block";
     } else {
         document.getElementById("arrowWall").style.display = "none";
     }
-    if (pageNum == 7) {
+    if (pageNum == 9) {
         document.getElementById("arrowAlgo").style.display = "block";
     } else {
         document.getElementById("arrowAlgo").style.display = "none";
     }
-    if (pageNum == 8) {
+    if (pageNum == 10) {
         document.getElementById("arrowStart").style.display = "block";
     } else {
         document.getElementById("arrowStart").style.display = "none";
     }
-
-    if (pageNum == 9) {
+    if (pageNum == 8) {
+        setTimeout(() => {
+            nextPage();
+        }, 7000)
+    }
+    if (pageNum == 11) {
         skipTutorial();
     }
 

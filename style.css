@@ -79,6 +79,14 @@
     cursor: pointer;
 }
 
+.nav-item.active.weight {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 150px;
+    cursor: pointer;
+}
+
 .nav-item.active.startalgo {
     transform: translateY(5px);
     white-space: nowrap;
