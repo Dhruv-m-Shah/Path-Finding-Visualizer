@@ -13,7 +13,7 @@ startBox = new location1(-1, -1) // Location of the "start" node
 endBox = new location1(-1, -1) // Location of the "end" node
 
 wallSet = []; // Look for walls (Using array for now, problem with javascript SET and unique objects)
-
+NodesTraversed = [] // djkstras nodes that have been traversed
 algorithm = 0; // What algorithm to be used (1 -> A*,  2 -> dijkstra's, 3 -> BFS)
 wall_marker = 0;
 
@@ -43,7 +43,6 @@ function reportWindowSize() {
     // Box height
     var bh = window.innerHeight - 120;
     drawBoard();
-
 }
 
 window.onresize = reportWindowSize;
@@ -68,7 +67,6 @@ function new_array() {
             weights[j][i] = 0;
         }
     }
-
 }
 
 drawBoard();
@@ -108,12 +106,9 @@ function lightUpSquare(xpos, ypos) {
         return;
     }
 
-    if (inset(wallSet, x, y)) {
-        return;
-    }
-    if (inset(visitednodes, x, y)) {
-        return;
-    }
+    if (inset(wallSet, x, y)) return; // Walls
+    if (inset(visitednodes, x, y))  return; // BFS
+    if(inset(NodesTraversed, x, y)) return; // djkstras
 
     if (x != previousGrid.xpos || y != previousGrid.ypos) {
         if ((previousGrid.xpos == startBox.xpos && previousGrid.ypos == startBox.ypos) ||
@@ -278,7 +273,6 @@ function weight(xpos, ypos) {
     context.fillStyle = "#a1e7f7";
     weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
     context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
-
 }
 
 
@@ -421,7 +415,7 @@ function draw(xpos, ypos) {
     }
     context.fillStyle = "#32d6db";
     context.fillRect(xpos, ypos, 40, 40);
-    if(weights[xpos/40][ypos/40] != 0){
+    if (weights[xpos / 40][ypos / 40] != 0) {
         context.fillStyle = "#a1e7f7";
         context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
     }
@@ -554,11 +548,11 @@ function dijkstras() {
             cameFrom[j][i] = 99999; // Setting it to a large number, convert this into a variable later.
         }
     }
-    traversedWeights[startBox.xpos/40][startBox.ypos/40] = 0; // Set the value of the initial starting point to 0
+    traversedWeights[startBox.xpos / 40][startBox.ypos / 40] = 0; // Set the value of the initial starting point to 0
     currentNodes = [
         [startBox.xpos, startBox.ypos]
     ];
-    dijkstras_start(currentNodes, traversedWeights, cameFrom);
+    dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
 }
 
 function tracePath(xpos, ypos) {
@@ -568,7 +562,7 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
-        if(weights[xpos/40][ypos/40] != 0){
+        if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
         }
@@ -580,7 +574,7 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
-        if(weights[xpos/40][ypos/40] != 0){
+        if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
         }
@@ -592,7 +586,7 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
-        if(weights[xpos/40][ypos/40] != 0){
+        if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
         }
@@ -604,7 +598,7 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
-        if(weights[xpos/40][ypos/40] != 0){
+        if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
         }
@@ -614,35 +608,39 @@ function tracePath(xpos, ypos) {
     }
 }
 
-function dijkstras_start(currentNodes, traversedWeights, cameFrom) {
-    console.log( (Math.floor(bh / 40) + 1) * 40);
+function dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed) {
+    console.log((Math.floor(bh / 40) + 1) * 40);
     console.log(traversedWeights)
-    console.log( traversedWeights.length * (traversedWeights[0].length) - 1);
+    console.log(traversedWeights.length * (traversedWeights[0].length) - 1);
     if (currentNodes.length == traversedWeights.length * (traversedWeights[0].length - 1)) {
         tracePath(endBox.xpos, endBox.ypos);
         return;
     }
     xpos = currentNodes[currentNodes.length - 1][0];
     ypos = currentNodes[currentNodes.length - 1][1];
-   console.log(xpos);
-    if (xpos + 40 <= bw && !inset(currentNodes, xpos + 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40] < traversedWeights[(xpos / 40) + 1][ypos / 40]) {
+    console.log(xpos);
+    if (xpos + 40 <= bw && !inset(currentNodes, xpos + 40, ypos) && !inset(wallSet, xpos + 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40] < traversedWeights[(xpos / 40) + 1][ypos / 40]) {
         traversedWeights[(xpos / 40) + 1][ypos / 40] = traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40];
         cameFrom[(xpos / 40) + 1][ypos / 40] = 1;
+        NodesTraversed.push([xpos + 40, ypos]);
         draw(xpos + 40, ypos);
     }
-    if (xpos - 40 >= 0 && !inset(currentNodes, xpos - 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) - 1][ypos / 40] < traversedWeights[(xpos / 40) - 1][ypos / 40]) {
+    if (xpos - 40 >= 0 && !inset(currentNodes, xpos - 40, ypos) && !inset(wallSet, xpos - 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) - 1][ypos / 40] < traversedWeights[(xpos / 40) - 1][ypos / 40]) {
         traversedWeights[(xpos / 40) - 1][ypos / 40] = traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) - 1][ypos / 40];
         cameFrom[(xpos / 40) - 1][ypos / 40] = 2;
+        NodesTraversed.push([xpos - 40, ypos]);
         draw(xpos - 40, ypos);
     }
-    if (ypos + 40 < bh && !inset(currentNodes, xpos, ypos + 40) && traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] < traversedWeights[xpos / 40][(ypos / 40) + 1]) {
+    if (ypos + 40 < bh && !inset(currentNodes, xpos, ypos + 40) && !inset(wallSet, xpos, ypos + 40) && traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] < traversedWeights[xpos / 40][(ypos / 40) + 1]) {
         traversedWeights[xpos / 40][(ypos / 40) + 1] = traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1];
         cameFrom[(xpos / 40)][(ypos / 40) + 1] = 3;
+        NodesTraversed.push([xpos, ypos + 40]);
         draw(xpos, ypos + 40);
     }
-    if (ypos - 40 >= 0 && !inset(currentNodes, xpos, ypos - 40) && (traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) - 1]) < traversedWeights[xpos / 40][(ypos / 40) - 1]) {
+    if (ypos - 40 >= 0 && !inset(currentNodes, xpos, ypos - 40) && !inset(wallSet, xpos, ypos - 40) && (traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) - 1]) < traversedWeights[xpos / 40][(ypos / 40) - 1]) {
         traversedWeights[xpos / 40][(ypos / 40) - 1] = traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) - 1];
         cameFrom[(xpos / 40)][(ypos / 40) - 1] = 4;
+        NodesTraversed.push([xpos, ypos - 40]);
         draw(xpos, ypos - 40);
     }
     console.log(cameFrom);
@@ -663,7 +661,7 @@ function dijkstras_start(currentNodes, traversedWeights, cameFrom) {
     console.log(currentNodes);
     currentNodes.push([nodex, nodey]);
     setTimeout(() => {
-        dijkstras_start(currentNodes, traversedWeights, cameFrom);
+        dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
     }, 1)
 }
 
