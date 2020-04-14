@@ -421,6 +421,10 @@ function draw(xpos, ypos) {
     }
     context.fillStyle = "#32d6db";
     context.fillRect(xpos, ypos, 40, 40);
+    if(weights[xpos/40][ypos/40] != 0){
+        context.fillStyle = "#a1e7f7";
+        context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+    }
     context.stroke();
 }
 
@@ -564,6 +568,10 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
+        if(weights[xpos/40][ypos/40] != 0){
+            context.fillStyle = "#a1e7f7";
+            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+        }
         setTimeout(() => {
             tracePath(xpos - 40, ypos);
         }, 100)
@@ -572,6 +580,10 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
+        if(weights[xpos/40][ypos/40] != 0){
+            context.fillStyle = "#a1e7f7";
+            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+        }
         setTimeout(() => {
             tracePath(xpos + 40, ypos);
         }, 100)
@@ -580,6 +592,10 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
+        if(weights[xpos/40][ypos/40] != 0){
+            context.fillStyle = "#a1e7f7";
+            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+        }
         setTimeout(() => {
             tracePath(xpos, ypos - 40);
         }, 100)
@@ -588,6 +604,10 @@ function tracePath(xpos, ypos) {
         context.fillStyle = "#18859e";
         context.fillRect(xpos, ypos, 40, 40);
         context.stroke();
+        if(weights[xpos/40][ypos/40] != 0){
+            context.fillStyle = "#a1e7f7";
+            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+        }
         setTimeout(() => {
             tracePath(xpos, ypos + 40);
         }, 100)
@@ -595,9 +615,10 @@ function tracePath(xpos, ypos) {
 }
 
 function dijkstras_start(currentNodes, traversedWeights, cameFrom) {
+    console.log( (Math.floor(bh / 40) + 1) * 40);
     console.log(traversedWeights)
-    console.log( traversedWeights.length * traversedWeights[0].length);
-    if (currentNodes.length == traversedWeights.length * traversedWeights[0].length) {
+    console.log( traversedWeights.length * (traversedWeights[0].length) - 1);
+    if (currentNodes.length == traversedWeights.length * (traversedWeights[0].length - 1)) {
         tracePath(endBox.xpos, endBox.ypos);
         return;
     }
@@ -614,7 +635,7 @@ function dijkstras_start(currentNodes, traversedWeights, cameFrom) {
         cameFrom[(xpos / 40) - 1][ypos / 40] = 2;
         draw(xpos - 40, ypos);
     }
-    if (ypos + 40 <= bh && !inset(currentNodes, xpos, ypos + 40) && traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] < traversedWeights[xpos / 40][(ypos / 40) + 1]) {
+    if (ypos + 40 < bh && !inset(currentNodes, xpos, ypos + 40) && traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] < traversedWeights[xpos / 40][(ypos / 40) + 1]) {
         traversedWeights[xpos / 40][(ypos / 40) + 1] = traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1];
         cameFrom[(xpos / 40)][(ypos / 40) + 1] = 3;
         draw(xpos, ypos + 40);
@@ -629,7 +650,7 @@ function dijkstras_start(currentNodes, traversedWeights, cameFrom) {
     var nodex = -1;
     var nodey = -1;
     for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
-        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+        for (var i = 0; i < Math.floor(bh / 40); i++) {
             if (!inset(currentNodes, j * 40, i * 40)) {
                 if (traversedWeights[j][i] < minSoFar) {
                     minSoFar = traversedWeights[j][i];
