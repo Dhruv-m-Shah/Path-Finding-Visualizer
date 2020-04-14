@@ -107,8 +107,8 @@ function lightUpSquare(xpos, ypos) {
     }
 
     if (inset(wallSet, x, y)) return; // Walls
-    if (inset(visitednodes, x, y))  return; // BFS
-    if(inset(NodesTraversed, x, y)) return; // djkstras
+    if (inset(visitednodes, x, y)) return; // BFS
+    if (inset(NodesTraversed, x, y)) return; // djkstras
 
     if (x != previousGrid.xpos || y != previousGrid.ypos) {
         if ((previousGrid.xpos == startBox.xpos && previousGrid.ypos == startBox.ypos) ||
@@ -559,9 +559,11 @@ function tracePath(xpos, ypos) {
     console.log(xpos, ypos);
     if (xpos == startBox.xpos && ypos == startBox.ypos) return;
     if (cameFrom[xpos / 40][ypos / 40] == 1) {
-        context.fillStyle = "#18859e";
-        context.fillRect(xpos, ypos, 40, 40);
-        context.stroke();
+        if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
+            context.fillStyle = "#18859e";
+            context.fillRect(xpos, ypos, 40, 40);
+            context.stroke();
+        }
         if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
@@ -571,9 +573,11 @@ function tracePath(xpos, ypos) {
         }, 100)
     }
     if (cameFrom[xpos / 40][ypos / 40] == 2) {
-        context.fillStyle = "#18859e";
-        context.fillRect(xpos, ypos, 40, 40);
-        context.stroke();
+        if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
+            context.fillStyle = "#18859e";
+            context.fillRect(xpos, ypos, 40, 40);
+            context.stroke();
+        }
         if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
@@ -583,9 +587,11 @@ function tracePath(xpos, ypos) {
         }, 100)
     }
     if (cameFrom[xpos / 40][ypos / 40] == 3) {
-        context.fillStyle = "#18859e";
-        context.fillRect(xpos, ypos, 40, 40);
-        context.stroke();
+        if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
+            context.fillStyle = "#18859e";
+            context.fillRect(xpos, ypos, 40, 40);
+            context.stroke();
+        }
         if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
@@ -595,9 +601,11 @@ function tracePath(xpos, ypos) {
         }, 100)
     }
     if (cameFrom[xpos / 40][ypos / 40] == 4) {
-        context.fillStyle = "#18859e";
-        context.fillRect(xpos, ypos, 40, 40);
-        context.stroke();
+        if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
+            context.fillStyle = "#18859e";
+            context.fillRect(xpos, ypos, 40, 40);
+            context.stroke();
+        }
         if (weights[xpos / 40][ypos / 40] != 0) {
             context.fillStyle = "#a1e7f7";
             context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
