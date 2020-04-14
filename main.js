@@ -263,6 +263,7 @@ function weight(xpos, ypos) {
     if (inset(wallSet, x, y)) {
         return;
     }
+    if((x == startBox.xpos && y == startBox.ypos) || (x == endBox.xpos && y == endBox.ypos)) return;
     if (weights[Math.floor(x / 40)][Math.floor(y / 40)] == 9) return;
     context.font = "30px Arial";
     console.log(weights);
