@@ -1,28 +1,26 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <link rel="shortcut icon" type="image/x-icon" href="imgs\favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="imgs/favicon.png" />
   <title>Path Finding Visualizer</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img class="logo" src="imgs\Logo.png"> Path Finding Visualizer</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <a class="navbar-brand" href="#"><img class="logo" src="imgs/Logo.png"> Path Finding Visualizer</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-
+      
       <li class="nav-item active start">
-        <div onclick="start_state()" type="button">
+        <div onclick="start_state()">
           <img class="start" src="imgs/flag.png">
           <p id="startBut" class="navbarText">Start Node</p>
         </div>
       </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle alog" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -34,6 +32,7 @@
           <a class="dropdown-item" href="#" onclick="bfs_mode()">BFS</a>
         </div>
       </li>
+
       <li class="nav-item active end">
         <div onclick="end_state()">
           <img class="end" src="imgs/End.png">

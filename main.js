@@ -263,7 +263,7 @@ function weight(xpos, ypos) {
     if (inset(wallSet, x, y)) {
         return;
     }
-    if((x == startBox.xpos && y == startBox.ypos) || (x == endBox.xpos && y == endBox.ypos)) return;
+    if ((x == startBox.xpos && y == startBox.ypos) || (x == endBox.xpos && y == endBox.ypos)) return;
     if (weights[Math.floor(x / 40)][Math.floor(y / 40)] == 9) return;
     context.font = "30px Arial";
     console.log(weights);
@@ -300,7 +300,6 @@ onmousemove = function (e) {
     } else {
         lightUpSquare(event.pageX + 185, event.pageY - 94);
     }
-
 }
 
 
@@ -347,6 +346,7 @@ function add_weight() {
 function clear_slate() {
     state_val = 0;
     wallSet = [];
+    NodesTraversed = [];
     visitednodes = [];
     cameFrom = [];
     startBox.xpos = -1;
@@ -361,10 +361,14 @@ function clear_slate() {
             context.fillRect(x, y, 40, 40);
         }
     }
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            weights[j][i] = 0;
+        }
+    }
     context.stroke();
 
 }
-
 
 function aStar_mode() {
     algorithm = 1;
@@ -422,8 +426,6 @@ function draw(xpos, ypos) {
     }
     context.stroke();
 }
-
-
 
 function draw_aqua(xpos, ypos, count) {
     if (count == 42) {
@@ -564,11 +566,12 @@ function tracePath(xpos, ypos) {
             context.fillStyle = "#18859e";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
+            if (weights[xpos / 40][ypos / 40] != 0) {
+                context.fillStyle = "#a1e7f7";
+                context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+            }
         }
-        if (weights[xpos / 40][ypos / 40] != 0) {
-            context.fillStyle = "#a1e7f7";
-            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
-        }
+
         setTimeout(() => {
             tracePath(xpos - 40, ypos);
         }, 100)
@@ -578,11 +581,12 @@ function tracePath(xpos, ypos) {
             context.fillStyle = "#18859e";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
+            if (weights[xpos / 40][ypos / 40] != 0) {
+                context.fillStyle = "#a1e7f7";
+                context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+            }
         }
-        if (weights[xpos / 40][ypos / 40] != 0) {
-            context.fillStyle = "#a1e7f7";
-            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
-        }
+
         setTimeout(() => {
             tracePath(xpos + 40, ypos);
         }, 100)
@@ -592,11 +596,12 @@ function tracePath(xpos, ypos) {
             context.fillStyle = "#18859e";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
+            if (weights[xpos / 40][ypos / 40] != 0) {
+                context.fillStyle = "#a1e7f7";
+                context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+            }
         }
-        if (weights[xpos / 40][ypos / 40] != 0) {
-            context.fillStyle = "#a1e7f7";
-            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
-        }
+
         setTimeout(() => {
             tracePath(xpos, ypos - 40);
         }, 100)
@@ -606,11 +611,12 @@ function tracePath(xpos, ypos) {
             context.fillStyle = "#18859e";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
+            if (weights[xpos / 40][ypos / 40] != 0) {
+                context.fillStyle = "#a1e7f7";
+                context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
+            }
         }
-        if (weights[xpos / 40][ypos / 40] != 0) {
-            context.fillStyle = "#a1e7f7";
-            context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
-        }
+
         setTimeout(() => {
             tracePath(xpos, ypos + 40);
         }, 100)
@@ -781,5 +787,18 @@ function prevPage() {
     if (pageNum == 11) {
         skipTutorial();
     }
+}
 
+GenerateRandomWeights();
+
+function GenerateRandomWeights() {
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40); i++) {
+            weights[j][i] = Math.floor((Math.random() * 9) + 1);
+            context.font = "30px Arial";
+            context.fillStyle = "#a1e7f7";
+            context.fillText(weights[j][i], j * 40 + 10, i * 40 + 30);
+            context.stroke();
+        }
+    }
 }

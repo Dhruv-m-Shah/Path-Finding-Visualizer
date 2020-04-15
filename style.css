@@ -35,9 +35,9 @@
     display: inline;
 }
 
-
-
 .nav-item.active.start {
+    z-index: 10;
+    float: right;
     transform: translateY(5px);
     white-space: nowrap;
     font-size: 18px;
@@ -409,7 +409,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(1368px, -10px);
+    transform: translate(1620px, -10px);
 }
 
 .animated.infinite.bounce.pointer-arrow-start {
