@@ -13,7 +13,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      
+
       <li class="nav-item active start">
         <div onclick="start_state()">
           <img class="start" src="imgs/flag.png">
@@ -33,6 +33,8 @@
         </div>
       </li>
 
+
+
       <li class="nav-item active end">
         <div onclick="end_state()">
           <img class="end" src="imgs/End.png">
@@ -45,23 +47,30 @@
           <p id="wallBut" class="navbarText">Wall</p>
         </div>
       </li>
-      <li class="nav-item active weight">
-        <div onclick="add_weight()">
-          <img class="brick" src="imgs/weight.svg">
-          <p class="navbarText">Add Weight</p>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle weights" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Weights
+        </a>
+        <div class="dropdown-menu weights" aria-labelledby="navbarDropdown" id="dropdown">
+          <a class="dropdown-item" href="#" onclick="add_weight()">Add Weight</a>
+          <a class="dropdown-item" href="#" onclick="GenerateRandomWeights()">Generate Random Weights</a>
         </div>
       </li>
+
       <li class="nav-item active startalgo">
         <div onclick="start_algo()">
           <img class="brick" src="imgs/start.svg">
           <p class="navbarText">Start Path Finding</p>
         </div>
       </li>
-      <li class="nav-item active startalgo">
+      <li class="nav-item active clear">
         <div onclick="clear_slate()">
           <p class="navbarText">Clear Board</p>
         </div>
       </li>
+
     </ul>
 
   </div>

@@ -31,6 +31,18 @@
     margin-left: 184px;
 }
 
+.nav-link.dropdown-toggle.weights{
+    min-width: 170px;
+    transform: translateY(-3px);
+    margin-left: 130px;
+    color: black;
+    font-size: 20px;
+}
+
+.dropdown-menu.weights {
+    margin-left: 184px;
+}
+
 .start-div {
     display: inline;
 }
@@ -46,6 +58,14 @@
 }
 
 .nav-item.active.end {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 98px;
+    cursor: pointer;
+}
+
+.nav-item.active.random{
     transform: translateY(5px);
     white-space: nowrap;
     font-size: 18px;
@@ -72,6 +92,7 @@
 }
 
 .nav-item.active.wall {
+    z-index: 10;
     transform: translateY(5px);
     white-space: nowrap;
     font-size: 18px;
@@ -91,7 +112,15 @@
     transform: translateY(5px);
     white-space: nowrap;
     font-size: 18px;
-    margin-left: 150px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.nav-item.active.clear {
+    transform: translateY(5px);
+    white-space: nowrap;
+    font-size: 18px;
+    margin-left: 120px;
     cursor: pointer;
 }
 
@@ -409,7 +438,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(1620px, -10px);
+    transform: translate(1560px, -10px);
 }
 
 .animated.infinite.bounce.pointer-arrow-start {

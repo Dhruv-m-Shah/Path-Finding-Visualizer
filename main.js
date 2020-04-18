@@ -242,10 +242,13 @@ function landing_animation_end(img, xpos, ypos, size, count) {
 }
 
 function wall_block(xpos, ypos) {
+    console.log(endBox.xpos, endBox.ypos)
     xpos = xpos - 28 - 200;
     ypos = ypos - 28;
     var x = Math.floor(xpos / 40) * 40;
     var y = Math.floor(ypos / 40) * 40;
+    if(x == endBox.xpos && y == endBox.ypos) return;
+    if(x == startBox.xpos && y == startBox.ypos) return;
     wallSet.push([x, y]);
     context.fillStyle = "#75402b";
     context.fillRect(x, y, 40, 40);
@@ -340,6 +343,9 @@ function wall_state() {
 }
 
 function add_weight() {
+    document.getElementById("startBut").style.fontWeight = "normal";
+    document.getElementById("endBut").style.fontWeight = "normal";
+    document.getElementById("wallBut").style.fontWeight = "normal";
     state_val = 4;
 }
 
@@ -789,9 +795,10 @@ function prevPage() {
     }
 }
 
-GenerateRandomWeights();
+
 
 function GenerateRandomWeights() {
+    clear_slate();
     for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
         for (var i = 0; i < Math.floor(bh / 40); i++) {
             weights[j][i] = Math.floor((Math.random() * 9) + 1);
