@@ -167,25 +167,9 @@ function start_block(xpos, ypos) {
     context.imageSmoothingEnabled = false;
     startBox.xpos = x;
     startBox.ypos = y;
-    landing_animation_start(img, x - 6, y - 10, 30, 0);
-
+    context.drawImage(img, x, y-8, 50, 50);
 }
 
-function landing_animation_start(img, xpos, ypos, size, count) {
-    if (count == 30) {
-        return;
-    }
-    context.fillStyle = "#FFFFFF";
-    context.fillRect(xpos + 6, ypos + 10, 40, 40);
-    context.stroke();
-    context.imageSmoothingEnabled = false;
-    context.drawImage(img, xpos, ypos + 1, 30 + count, 30 + count);
-
-    setTimeout(() => {
-        landing_animation_start(img, xpos, ypos, size, count + 1);
-    }, 5)
-
-}
 
 
 function end_block(xpos, ypos) {
@@ -213,33 +197,11 @@ function end_block(xpos, ypos) {
     var img = document.createElement("img");
     img.src = "imgs\\End.png";
     context.imageSmoothingEnabled = false;
-    context.drawImage(img, x + 5, y + 5, 30, 30);
     wall_marker = 0;
-    landing_animation_end(img, x + 5, y + 5, 0, 0);
+    context.drawImage(img, x+5, y+5, 30, 30);
 }
 
 
-function landing_animation_end(img, xpos, ypos, size, count) {
-    if (count == 30) {
-        return;
-    }
-    if (wall_marker == 1) {
-        context.fillStyle = "#FFFFFF";
-        context.fillRect(xpos - 5, ypos - 5, 40, 40);
-        context.stroke();
-        return;
-    }
-    context.fillStyle = "#FFFFFF";
-    context.fillRect(xpos - 5, ypos - 5, 40, 40);
-    context.stroke();
-    context.imageSmoothingEnabled = false;
-    context.drawImage(img, xpos, ypos, count, count);
-
-    setTimeout(() => {
-        landing_animation_end(img, xpos, ypos, size, count + 1);
-    }, 5)
-
-}
 
 function wall_block(xpos, ypos) {
     console.log(endBox.xpos, endBox.ypos)
