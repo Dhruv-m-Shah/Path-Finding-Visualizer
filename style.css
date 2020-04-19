@@ -383,12 +383,24 @@
     position: absolute;
     max-width: 100px;
     transform: translate(440px, -10px);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .animated.infinite.bounce.pointer-arrow {
     z-index: 11;
     position: absolute;
     max-width: 100px;
+    
 }
 
 .arrowEnd {
@@ -397,6 +409,17 @@
     position: absolute;
     max-width: 100px;
     transform: translate(920px, -10px);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .animated.infinite.bounce.pointer-arrow-end {
@@ -411,6 +434,17 @@
     position: absolute;
     max-width: 100px;
     transform: translate(1120px, -10px);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .animated.infinite.bounce.pointer-arrow-wall {
@@ -425,6 +459,17 @@
     position: absolute;
     max-width: 100px;
     transform: translate(660px, -10px);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .animated.infinite.bounce.pointer-arrow-algo {
@@ -439,6 +484,17 @@
     position: absolute;
     max-width: 100px;
     transform: translate(1560px, -10px);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
 }
 
 .animated.infinite.bounce.pointer-arrow-start {
