@@ -7,76 +7,61 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vivus@0.4.5/dist/vivus.min.js"></script>
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img class="logo" src="imgs/Logo.png"> Path Finding Visualizer</a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item active start">
-        <div onclick="start_state()">
-          <img class="start" src="imgs/flag.png">
-          <p id="startBut" class="navbarText">Start Node</p>
+<body style="background: #6e6d6a">
+  <div class="newNavBar">
+    <div class = "leftBar">
+      <div onclick="start_state()" class = "start_wrapper">
+        <p id = "startBut" class="startBut">Start Node</p>
+      </div>
+      <div onclick="end_state()" class = "end_wrapper">
+        <p id="endBut" class="endBut">End Node</p>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" type="button">Action</button>
+          <button class="dropdown-item" type="button">Another action</button>
+          <button class="dropdown-item" type="button">Something else here</button>
         </div>
-      </li>
+      </div>
+    </div>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle alog" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Pick Algorithm
-        </a>
-        <div class="dropdown-menu alog" aria-labelledby="navbarDropdown" id="dropdown">
-          <a class="dropdown-item" href="#" onclick="aStar_mode()">A*</a>
-          <a class="dropdown-item" href="#" onclick="dijkstra_mode()">Dijkstra</a>
-          <a class="dropdown-item" href="#" onclick="bfs_mode()">BFS</a>
-        </div>
-      </li>
-
-
-
-      <li class="nav-item active end">
-        <div onclick="end_state()">
-          <img class="end" src="imgs/End.png">
-          <p id="endBut" class="navbarText">End Node</p>
-        </div>
-      </li>
-      <li class="nav-item active wall">
-        <div onclick="wall_state()">
-          <img class="brick" src="imgs/Brick.svg">
-          <p id="wallBut" class="navbarText">Wall</p>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle weights" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+    <div class = "rightBar">
+      <div onclick="start_state()" class = "start_wrapper">
+        <p onclick="start_state()" class="start_button">Wall</p>
+      </div>
+      <div onclick="end_state()" class = "end_wrapper">
+        <p id="end_button" class="end_button">Clear Board</p>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Weights
-        </a>
-        <div class="dropdown-menu weights" aria-labelledby="navbarDropdown" id="dropdown">
-          <a class="dropdown-item" href="#" onclick="add_weight()">Add Weight</a>
-          <a class="dropdown-item" href="#" onclick="GenerateRandomWeights()">Generate Random Weights</a>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item" type="button">Action</button>
+          <button class="dropdown-item" type="button">Another action</button>
+          <button class="dropdown-item" type="button">Something else here</button>
         </div>
-      </li>
+      </div>
+    </div>
 
-      <li class="nav-item active startalgo">
-        <div onclick="start_algo()">
-          <img class="brick" src="imgs/start.svg">
-          <p class="navbarText">Start Path Finding</p>
-        </div>
-      </li>
-      <li class="nav-item active clear">
-        <div onclick="clear_slate()">
-          <p class="navbarText">Clear Board</p>
-        </div>
-      </li>
 
-    </ul>
-
+    <div id="circle">
+      <img class="static" src="animation1.jpg">
+      <img class="path" src="animation.gif">
+    </div>
+    <script>
+      new Vivus('my-svg', {
+        duration: 200
+      });
+    </script>
   </div>
-</nav>
-
-<body style="background: lightblue;">
   <!-- Beginning of tutorial slides -->
   <div class="arrow" id="arrow">
     <img class="animated infinite bounce pointer-arrow" src="imgs/up-arrow.svg">
