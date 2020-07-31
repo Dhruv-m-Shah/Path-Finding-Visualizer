@@ -533,7 +533,7 @@
 
 .static:hover{
     position: absolute;
-    opacity: 0;
+    opacity: 0 !important;
 }
 
 .path{
@@ -644,5 +644,64 @@
     transform: translateY(5px);
     background-color: black !important;
 }
+
+.wall_wrapper{
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #000000;
+    padding-left: auto;
+    padding-right: auto;
+    line-height: 1em;
+    object-fit: contain;
+    text-decoration: none;
+}
+
+.wallBut{
+    display: inline;
+    position: relative;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.wallBut:hover{
+    display: inline;
+    position: relative;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #16a085;
+}
+
+.clear_wrapper{
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #000000;
+    padding-left: auto;
+    padding-right: auto;
+    line-height: 1em;
+    object-fit: contain;
+    text-decoration: none;
+}
+
+.clearBut{
+    display: inline;
+    position: relative;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+
+.clearBut:hover{
+    display: inline;
+    position: relative;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #16a085;
+}
+
+
 
 
