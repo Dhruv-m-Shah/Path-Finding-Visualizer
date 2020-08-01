@@ -30,7 +30,11 @@
     font-size: 20px;
 }
 
+.dropdown-menu-algo{
+    z-index: 11;
+}
 .dropdown-menu.alog {
+    z-index: 11;
     margin-left: 184px;
 }
 
@@ -385,7 +389,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(440px, -10px);
+    transform: translateY(50px);
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -411,7 +415,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(920px, -10px);
+    transform: translateY(50px);
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -436,7 +440,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(1120px, -10px);
+    transform: translate(-25px, 50px);
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -461,7 +465,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(660px, -10px);
+    transform: translate(25px, 50px);
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -486,7 +490,7 @@
     display: none;
     position: absolute;
     max-width: 100px;
-    transform: translate(1560px, -10px);
+    transform: translate(50px, 200px);
     -webkit-touch-callout: none;
     /* iOS Safari */
     -webkit-user-select: none;
@@ -524,6 +528,13 @@
 }
 
 .static{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
+
     position: absolute;
     transform: translate(47px, 62px);
     display: block;
@@ -537,6 +548,13 @@
 }
 
 .path{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
+
     z-index: -1;
     position: absolute;
     transform: translate(47px, 60px);
@@ -632,6 +650,7 @@
 }
 
 .dropdown{
+    z-index: 12;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;

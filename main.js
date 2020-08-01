@@ -67,12 +67,10 @@ function drawBoard() {
             context.rect(x, y, 40, 40);
             context.linewidth = 1;
             context.strokeStyle = "#666666"
-            context.stroke();
-            context.fillStyle = "#000000";
-            context.fill();
-            
+            context.fillStyle = "#000000";  
         }
     }
+    context.fill();
     context.stroke();
 }
 
@@ -165,13 +163,19 @@ function start_block(xpos, ypos) {
      
         context.fillStyle = "#000000";
         context.fillRect(startBox.xpos, startBox.ypos, 40, 40);
-        context.stroke();
+       
+        if(weights[startBox.xpos / 40][startBox.ypos / 40] != 0.5){
+            context.fillStyle = "#ffffff";
+            console.log("TEST");
+            context.fillText(weights[startBox.xpos / 40][startBox.ypos / 40], startBox.xpos + 10, startBox.ypos + 30);
+            context.stroke();
+        }
     }
     context.fillStyle = "#000000";
     context.fillRect(x, y, 40, 40);
     context.stroke();
     var img = document.createElement("img");
-    img.src = "imgs\\flag.png";
+    img.src = "imgs\\flag.svg";
     context.imageSmoothingEnabled = false;
     startBox.xpos = x;
     startBox.ypos = y;
@@ -200,6 +204,10 @@ function end_block(xpos, ypos) {
     if (endBox.xpos != -1 && endBox.ypos != -1) {
         context.fillStyle = "#000000";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
+        if(weights[endBox.xpos / 40][endBox.ypos / 40] != 0.5){
+            context.fillStyle = "#ffffff";
+            context.fillText(weights[endBox.xpos / 40][endBox.ypos / 40], endBox.xpos + 10, endBox.ypos + 30);
+        }
         context.stroke();
     }
 
@@ -212,7 +220,7 @@ function end_block(xpos, ypos) {
     img.src = "imgs\\End.svg";
     context.imageSmoothingEnabled = false;
     img.onload = function(){
-        context.drawImage(img, x + 5, y + 5, 30, 30);
+        context.drawImage(img, x, y, 40, 40);
     }
     wall_marker = 0;
     
@@ -252,7 +260,12 @@ function weight(xpos, ypos) {
     context.stroke();
 
     context.fillStyle = "#a1e7f7";
-    weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
+    if(weights[Math.floor(x / 40)][Math.floor(y / 40)] == 0.5){
+        weights[Math.floor(x / 40)][Math.floor(y / 40)] = 1;
+    }
+    else{
+        weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
+    }
     context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
 }
 
@@ -343,14 +356,14 @@ function clear_slate() {
             context.rect(x, y, 40, 40);
             context.linewidth = 1;
             context.strokeStyle = "#666666"
-            context.stroke();
             context.fillStyle = "#000000";
-            context.fill();
             if(x == bw){
                 console.log("TEST");
             }
         }
     }
+    context.stroke();
+    context.fill();
     for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
         for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
             weights[j][i] = 0.5;
@@ -456,6 +469,7 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
     }
 
     if (nodes.length == 0) {
+        document.getElementById('static').style.opacity = 1;
         alert("Didn't find it :(");
         return;
     }
@@ -784,7 +798,7 @@ function GenerateRandomWeights() {
             context.font = "30px Arial";
             context.fillStyle = "#ffffff";
             context.fillText(weights[j][i], j * 40 + 10, i * 40 + 30);
-            context.stroke();
         }
     }
+    context.stroke();
 }
