@@ -35,6 +35,18 @@ maxheight = (Math.floor(window.innerHeight / 40) - 3) * 40;
 // Box width
 context.beginPath();
 
+var weights = new Array(Math.floor(bw / 40) + 1);
+new_array()
+function new_array() {
+    for (var i = 0; i < weights.length; i++) {
+        weights[i] = new Array(Math.floor(bh / 40) + 1);
+    }
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            weights[j][i] = 0.5;
+        }
+    }
+}
 
 function reportWindowSize() {
     htmlCanvas.width = (Math.floor(window.innerWidth / 40) - 2) * 40;
@@ -47,30 +59,23 @@ function reportWindowSize() {
 
 window.onresize = reportWindowSize;
 
+
+
 function drawBoard() {
     for (var x = 0; x <= bw; x += 40) {
         for (var y = 0; y <= bh; y += 40) {
-            context.strokeStyle = "#a1e7f7";
             context.rect(x, y, 40, 40);
+            context.linewidth = 1;
+            context.strokeStyle = "#666666"
+            context.fillStyle = "#000000";  
         }
     }
+    context.fill();
     context.stroke();
 }
-var weights = new Array(Math.floor(bw / 40) + 1);
 
-function new_array() {
-    for (var i = 0; i < weights.length; i++) {
-        weights[i] = new Array(Math.floor(bh / 40) + 1);
-    }
-    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
-        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
-            weights[j][i] = 0;
-        }
-    }
-}
 
 drawBoard();
-new_array();
 
 function inset(array, x, y) {
     for (var i = 0; i < array.length; i++) {
@@ -115,9 +120,9 @@ function lightUpSquare(xpos, ypos) {
             (previousGrid.xpos == endBox.xpos && previousGrid.ypos == endBox.ypos) ||
             inset(wallSet, previousGrid.xpos, previousGrid.ypos) ||
             inset(visitednodes, previousGrid.xpos, previousGrid.ypos)) {
-            context.fillStyle = "#32d6db";
+            context.fillStyle = "#ffffff";
             context.fillRect(x, y, 40, 40);
-            if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0) {
+            if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0.5) {
                 context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
             }
             context.stroke();
@@ -126,14 +131,14 @@ function lightUpSquare(xpos, ypos) {
 
             return;
         }
-        context.fillStyle = "#FFFFFF"
+        context.fillStyle = "#000000"
         context.fillRect(previousGrid.xpos, previousGrid.ypos, 40, 40);
-        context.fillStyle = "#32d6db";
+        context.fillStyle = "#FFFFFF";
         context.fillRect(x, y, 40, 40);
-        if (weights[Math.floor(previousGrid.xpos / 40)][Math.floor(previousGrid.ypos / 40)] != 0) {
+        if (weights[Math.floor(previousGrid.xpos / 40)][Math.floor(previousGrid.ypos / 40)] != 0.5) {
             context.fillText(weights[Math.floor(previousGrid.xpos / 40)][Math.floor(previousGrid.ypos / 40)], previousGrid.xpos + 10, previousGrid.ypos + 30);
         }
-        if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0) {
+        if (weights[Math.floor(x / 40)][Math.floor(y / 40)] != 0.5) {
             context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
         }
         context.stroke();
@@ -155,19 +160,32 @@ function start_block(xpos, ypos) {
         nextPage();
     }
     if (startBox.xpos != -1 && startBox.ypos != -1) {
-        context.fillStyle = "#FFFFFF";
+     
+        context.fillStyle = "#000000";
         context.fillRect(startBox.xpos, startBox.ypos, 40, 40);
-        context.stroke();
+       
+        if(weights[startBox.xpos / 40][startBox.ypos / 40] != 0.5){
+            context.fillStyle = "#ffffff";
+            console.log("TEST");
+            context.fillText(weights[startBox.xpos / 40][startBox.ypos / 40], startBox.xpos + 10, startBox.ypos + 30);
+            context.stroke();
+        }
     }
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = "#000000";
     context.fillRect(x, y, 40, 40);
     context.stroke();
     var img = document.createElement("img");
-    img.src = "imgs\\flag.png";
+    img.src = "imgs\\flag.svg";
     context.imageSmoothingEnabled = false;
     startBox.xpos = x;
     startBox.ypos = y;
-    context.drawImage(img, x, y-8, 50, 50);
+    img.onload = function(){
+        context.drawImage(img, x+5, y+5, 32, 30);
+    }
+
+    console.log(x, y);
+    console.log("TEST AGAIN");
+    
 }
 
 
@@ -184,33 +202,39 @@ function end_block(xpos, ypos) {
         nextPage();
     }
     if (endBox.xpos != -1 && endBox.ypos != -1) {
-        context.fillStyle = "#FFFFFF";
+        context.fillStyle = "#000000";
         context.fillRect(endBox.xpos, endBox.ypos, 40, 40);
+        if(weights[endBox.xpos / 40][endBox.ypos / 40] != 0.5){
+            context.fillStyle = "#ffffff";
+            context.fillText(weights[endBox.xpos / 40][endBox.ypos / 40], endBox.xpos + 10, endBox.ypos + 30);
+        }
         context.stroke();
     }
 
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = "#000000";
     context.fillRect(x, y, 40, 40);
     context.stroke();
     endBox.xpos = x;
     endBox.ypos = y;
     var img = document.createElement("img");
-    img.src = "imgs\\End.png";
+    img.src = "imgs\\End.svg";
     context.imageSmoothingEnabled = false;
+    img.onload = function(){
+        context.drawImage(img, x, y, 40, 40);
+    }
     wall_marker = 0;
-    context.drawImage(img, x+5, y+5, 30, 30);
+    
 }
 
 
 
 function wall_block(xpos, ypos) {
-    console.log(endBox.xpos, endBox.ypos)
     xpos = xpos - 28 - 200;
     ypos = ypos - 28;
     var x = Math.floor(xpos / 40) * 40;
     var y = Math.floor(ypos / 40) * 40;
-    if(x == endBox.xpos && y == endBox.ypos) return;
-    if(x == startBox.xpos && y == startBox.ypos) return;
+    if (x == endBox.xpos && y == endBox.ypos) return;
+    if (x == startBox.xpos && y == startBox.ypos) return;
     wallSet.push([x, y]);
     context.fillStyle = "#75402b";
     context.fillRect(x, y, 40, 40);
@@ -231,13 +255,17 @@ function weight(xpos, ypos) {
     if ((x == startBox.xpos && y == startBox.ypos) || (x == endBox.xpos && y == endBox.ypos)) return;
     if (weights[Math.floor(x / 40)][Math.floor(y / 40)] == 9) return;
     context.font = "30px Arial";
-    console.log(weights);
     context.fillStyle = "#FFFFFF";
     context.fillRect(x, y, 40, 40);
     context.stroke();
 
     context.fillStyle = "#a1e7f7";
-    weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
+    if(weights[Math.floor(x / 40)][Math.floor(y / 40)] == 0.5){
+        weights[Math.floor(x / 40)][Math.floor(y / 40)] = 1;
+    }
+    else{
+        weights[Math.floor(x / 40)][Math.floor(y / 40)] += 1;
+    }
     context.fillText(weights[Math.floor(x / 40)][Math.floor(y / 40)], x + 10, y + 30);
 }
 
@@ -325,37 +353,43 @@ function clear_slate() {
     previousGrid.ypos = 0;
     for (var x = 0; x <= bw; x += 40) {
         for (var y = 0; y <= bh; y += 40) {
-            context.fillStyle = "#FFFFFF";
-            context.fillRect(x, y, 40, 40);
-        }
-    }
-    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
-        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
-            weights[j][i] = 0;
+            context.rect(x, y, 40, 40);
+            context.linewidth = 1;
+            context.strokeStyle = "#666666"
+            context.fillStyle = "#000000";
+            if(x == bw){
+                console.log("TEST");
+            }
         }
     }
     context.stroke();
+    context.fill();
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            weights[j][i] = 0.5;
+        }
+    }
 
 }
 
 function aStar_mode() {
     algorithm = 1;
     $("#dropdownMenuButton").text('A*');
-    document.getElementById("navbarDropdown").innerText = 'A*';
+    document.getElementById("dropdownMenu2").innerText = 'A*';
     document.getElementById("arrowAlgo").style.display = "none";
     if (pageNum == 9) nextPage();
 }
 
 function dijkstra_mode() {
     algorithm = 2;
-    document.getElementById("navbarDropdown").innerText = 'Dijkstra';
+    document.getElementById("dropdownMenu2").innerText = 'Dijkstra';
     document.getElementById("arrowAlgo").style.display = "none";
     if (pageNum == 9) nextPage();
 }
 
 function bfs_mode() {
     algorithm = 3;
-    document.getElementById("navbarDropdown").innerText = 'BFS';
+    document.getElementById("dropdownMenu2").innerText = 'BFS';
     document.getElementById("arrowAlgo").style.display = "none";
     if (pageNum == 9) nextPage();
 }
@@ -382,14 +416,13 @@ visitednodes = []
 cameFrom = []
 
 function draw(xpos, ypos) {
-    console.log(xpos, ypos);
     if (xpos == endBox.xpos && ypos == endBox.ypos) {
         return;
     }
-    context.fillStyle = "#32d6db";
+    context.fillStyle = "#c9c9c9";
     context.fillRect(xpos, ypos, 40, 40);
-    if (weights[xpos / 40][ypos / 40] != 0) {
-        context.fillStyle = "#a1e7f7";
+    if (weights[xpos / 40][ypos / 40] != 0.5) {
+        context.fillStyle = "#ffffff";
         context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
     }
     context.stroke();
@@ -402,7 +435,7 @@ function draw_aqua(xpos, ypos, count) {
     if (xpos == startBox.xpos && ypos == startBox.ypos) {
         return;
     }
-    context.fillStyle = "#18859e";
+    context.fillStyle = "#16a085";
     context.fillRect(xpos + 20 - (count / 2), ypos + 20 - (count / 2), count, count);
     context.stroke();
     setTimeout(() => {
@@ -425,6 +458,7 @@ function bfs() {
     visitednodes = [
         [startBox.xpos, startBox.ypos]
     ];
+    document.getElementById('static').style.opacity = 0;
     add(nodes, newnodes, visitednodes, 1, cameFrom);
 }
 
@@ -435,6 +469,7 @@ function add(nodes, newnodes, visitednodes, marker, cameFrom) {
     }
 
     if (nodes.length == 0) {
+        document.getElementById('static').style.opacity = 1;
         alert("Didn't find it :(");
         return;
     }
@@ -523,18 +558,18 @@ function dijkstras() {
     currentNodes = [
         [startBox.xpos, startBox.ypos]
     ];
+    document.getElementById('static').style.opacity = 0;
     dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
 }
 
 function tracePath(xpos, ypos) {
-    console.log(xpos, ypos);
     if (xpos == startBox.xpos && ypos == startBox.ypos) return;
     if (cameFrom[xpos / 40][ypos / 40] == 1) {
         if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
-            context.fillStyle = "#18859e";
+            context.fillStyle = "#16a085";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
-            if (weights[xpos / 40][ypos / 40] != 0) {
+            if (weights[xpos / 40][ypos / 40] != 0.5) {
                 context.fillStyle = "#a1e7f7";
                 context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
             }
@@ -546,10 +581,10 @@ function tracePath(xpos, ypos) {
     }
     if (cameFrom[xpos / 40][ypos / 40] == 2) {
         if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
-            context.fillStyle = "#18859e";
+            context.fillStyle = "#16a085";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
-            if (weights[xpos / 40][ypos / 40] != 0) {
+            if (weights[xpos / 40][ypos / 40] != 0.5) {
                 context.fillStyle = "#a1e7f7";
                 context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
             }
@@ -561,10 +596,10 @@ function tracePath(xpos, ypos) {
     }
     if (cameFrom[xpos / 40][ypos / 40] == 3) {
         if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
-            context.fillStyle = "#18859e";
+            context.fillStyle = "#16a085";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
-            if (weights[xpos / 40][ypos / 40] != 0) {
+            if (weights[xpos / 40][ypos / 40] != 0.5) {
                 context.fillStyle = "#a1e7f7";
                 context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
             }
@@ -576,10 +611,10 @@ function tracePath(xpos, ypos) {
     }
     if (cameFrom[xpos / 40][ypos / 40] == 4) {
         if (!(xpos == endBox.xpos && ypos == endBox.ypos)) {
-            context.fillStyle = "#18859e";
+            context.fillStyle = "#16a085";
             context.fillRect(xpos, ypos, 40, 40);
             context.stroke();
-            if (weights[xpos / 40][ypos / 40] != 0) {
+            if (weights[xpos / 40][ypos / 40] != 0.5) {
                 context.fillStyle = "#a1e7f7";
                 context.fillText(weights[xpos / 40][ypos / 40], xpos + 10, ypos + 30);
             }
@@ -592,16 +627,13 @@ function tracePath(xpos, ypos) {
 }
 
 function dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed) {
-    console.log((Math.floor(bh / 40) + 1) * 40);
-    console.log(traversedWeights)
-    console.log(traversedWeights.length * (traversedWeights[0].length) - 1);
     if (currentNodes.length == traversedWeights.length * (traversedWeights[0].length - 1)) {
         tracePath(endBox.xpos, endBox.ypos);
+        document.getElementById('static').style.opacity = 1;
         return;
     }
     xpos = currentNodes[currentNodes.length - 1][0];
     ypos = currentNodes[currentNodes.length - 1][1];
-    console.log(xpos);
     if (xpos + 40 <= bw && !inset(currentNodes, xpos + 40, ypos) && !inset(wallSet, xpos + 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40] < traversedWeights[(xpos / 40) + 1][ypos / 40]) {
         traversedWeights[(xpos / 40) + 1][ypos / 40] = traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40];
         cameFrom[(xpos / 40) + 1][ypos / 40] = 1;
@@ -626,7 +658,6 @@ function dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraverse
         NodesTraversed.push([xpos, ypos - 40]);
         draw(xpos, ypos - 40);
     }
-    console.log(cameFrom);
     var minSoFar = 100000; // 1 larger than the initial weights of the nodes
     var nodex = -1;
     var nodey = -1;
@@ -641,7 +672,6 @@ function dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraverse
             }
         }
     }
-    console.log(currentNodes);
     currentNodes.push([nodex, nodey]);
     setTimeout(() => {
         dijkstras_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
@@ -655,6 +685,7 @@ function drawPath(cameFrom, curBox) {
             setTimeout(() => {
                 drawPath(cameFrom, cameFrom[i][0])
             }, 100);
+            document.getElementById('static').style.opacity = 1;
             break;
         }
     }
@@ -765,9 +796,9 @@ function GenerateRandomWeights() {
         for (var i = 0; i < Math.floor(bh / 40); i++) {
             weights[j][i] = Math.floor((Math.random() * 9) + 1);
             context.font = "30px Arial";
-            context.fillStyle = "#a1e7f7";
+            context.fillStyle = "#ffffff";
             context.fillText(weights[j][i], j * 40 + 10, i * 40 + 30);
-            context.stroke();
         }
     }
+    context.stroke();
 }
