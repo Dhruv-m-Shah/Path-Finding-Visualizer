@@ -4,4 +4,5 @@ This application shows how certain path finding algorithms work by displaying th
 
 Play around with it here: <a href="https://dhruv-m-shah.github.io/Path-Finding-Visualizer/index.html" target="_blank">https://dhruv-m-shah.github.io/Path-Finding-Visualizer/index.html</a>
 
-
+Here's a quick demo of Dijkstra's algorithm in action!
+<img src = "https://github.com/Dhruv-m-Shah/Path-Finding-Visualizer/blob/master/imgs/Visualizer%20Demo.gif">
