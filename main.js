@@ -399,7 +399,8 @@ function start_algo() {
     if (pageNum == 10) skipTutorial();
     document.getElementById("")
     if (algorithm == 1) {
-        A();
+        console.log("TEST1235");
+        aStar();
     }
     if (algorithm == 2) {
         dijkstras();
@@ -689,6 +690,94 @@ function drawPath(cameFrom, curBox) {
             break;
         }
     }
+}
+
+function distance(node){
+    return Math.abs((node[0] - endBox.xpos)) + Math.abs((node[1] - endBox.ypos))*40;
+}
+
+
+function aStar() {
+    traversedWeights = new Array(Math.floor(bw / 40) + 1);
+    for (var i = 0; i < traversedWeights.length; i++) {
+        traversedWeights[i] = new Array(Math.floor(bh / 40) + 1);
+    }
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            traversedWeights[j][i] = 99999999999999; // Setting it to a large number, convert this into a variable later.
+        }
+    }
+
+    cameFrom = new Array(Math.floor(bw / 40) + 1); // Keeps track of where a node was traversed from, 1 -> left, 2 -> right, 3 -> up, 4 -> down
+    for (var i = 0; i < cameFrom.length; i++) {
+        cameFrom[i] = new Array(Math.floor(bh / 40) + 1);
+    }
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40) + 1; i++) {
+            cameFrom[j][i] = 99999999999999; // Setting it to a large number, convert this into a variable later.
+        }
+    }
+    traversedWeights[startBox.xpos / 40][startBox.ypos / 40] = 0; // Set the value of the initial starting point to 0
+    currentNodes = [
+        [startBox.xpos, startBox.ypos]
+    ];
+    document.getElementById('static').style.opacity = 0;
+    console.log("TEST123");
+    aStar_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
+}
+
+
+function aStar_start(currentNodes, traversedWeights, cameFrom, NodesTraversed){
+    if (currentNodes.length == traversedWeights.length * (traversedWeights[0].length - 1)) {
+        tracePath(endBox.xpos, endBox.ypos);
+        document.getElementById('static').style.opacity = 1;
+        return;
+    }
+    console.log("test678");
+    xpos = currentNodes[currentNodes.length - 1][0];
+    ypos = currentNodes[currentNodes.length - 1][1];
+    if (xpos + 40 <= bw && !inset(currentNodes, xpos + 40, ypos) && !inset(wallSet, xpos + 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40] + distance([(xpos / 40) + 1, ypos / 40]) < traversedWeights[(xpos / 40) + 1][ypos / 40]) {
+        traversedWeights[(xpos / 40) + 1][ypos / 40] = traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) + 1][ypos / 40] + distance([(xpos / 40) + 1, ypos / 40]);
+        cameFrom[(xpos / 40) + 1][ypos / 40] = 1;
+        NodesTraversed.push([xpos + 40, ypos]);
+        draw(xpos + 40, ypos);
+    }
+    if (xpos - 40 >= 0 && !inset(currentNodes, xpos - 40, ypos) && !inset(wallSet, xpos - 40, ypos) && traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) - 1][ypos / 40] + distance([(xpos / 40) - 1, ypos / 40])< traversedWeights[(xpos / 40) - 1][ypos / 40]) {
+        traversedWeights[(xpos / 40) - 1][ypos / 40] = traversedWeights[(xpos / 40)][ypos / 40] + weights[(xpos / 40) - 1][ypos / 40] + distance([(xpos / 40) - 1, ypos / 40]);
+        cameFrom[(xpos / 40) - 1][ypos / 40] = 2;
+        NodesTraversed.push([xpos - 40, ypos]);
+        draw(xpos - 40, ypos);
+    }
+    if (ypos + 40 < bh && !inset(currentNodes, xpos, ypos + 40) && !inset(wallSet, xpos, ypos + 40) && traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] + distance([(xpos / 40), (ypos / 40) + 1])< traversedWeights[xpos / 40][(ypos / 40) + 1]) {
+        traversedWeights[xpos / 40][(ypos / 40) + 1] = traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) + 1] + distance([xpos / 40, (ypos / 40) + 1]) ;
+        cameFrom[(xpos / 40)][(ypos / 40) + 1] = 3;
+        NodesTraversed.push([xpos, ypos + 40]);
+        draw(xpos, ypos + 40);
+    }
+    if (ypos - 40 >= 0 && !inset(currentNodes, xpos, ypos - 40) && !inset(wallSet, xpos, ypos - 40) && (traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) - 1]) + distance([xpos / 40, (ypos / 40) - 1]) < traversedWeights[xpos / 40][(ypos / 40) - 1]) {
+        traversedWeights[xpos / 40][(ypos / 40) - 1] = traversedWeights[(xpos / 40)][ypos / 40] + weights[xpos / 40][(ypos / 40) - 1] + distance([xpos / 40, (ypos / 40) - 1]) ;
+        cameFrom[(xpos / 40)][(ypos / 40) - 1] = 4;
+        NodesTraversed.push([xpos, ypos - 40]);
+        draw(xpos, ypos - 40);
+    }
+    var minSoFar = 100000; // 1 larger than the initial weights of the nodes
+    var nodex = -1;
+    var nodey = -1;
+    for (var j = 0; j < Math.floor(bw / 40) + 1; j++) {
+        for (var i = 0; i < Math.floor(bh / 40); i++) {
+            if (!inset(currentNodes, j * 40, i * 40)) {
+                if (traversedWeights[j][i] < minSoFar) {
+                    minSoFar = traversedWeights[j][i];
+                    nodex = j * 40;
+                    nodey = i * 40;
+                }
+            }
+        }
+    }
+    currentNodes.push([nodex, nodey]);
+    setTimeout(() => {
+        aStar_start(currentNodes, traversedWeights, cameFrom, NodesTraversed);
+    }, 1)
 }
 
 function skipTutorial() {
